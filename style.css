@@ -1,0 +1,185 @@
+html {
+    background-color: #ebebeb;
+}
+
+body {
+    margin-top: 0;
+    height: 100%;
+    margin: 0;
+    color: #fff;
+    font-family: 'Montserrat', cursive;
+
+}
+
+.flip-container:hover .flex-cards {
+    transform: rotateY(180deg);
+}
+.flex-cards {
+    margin: 0 auto;
+    /* padding: 20px; */
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background-color: #fbfbfb;
+    color: black;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+}
+
+.flex-empty {
+    flex-grow: 1;
+    margin: 50px;
+}
+.flip-container {
+    height: 50%;
+
+    /* padding: 50px; */
+}
+
+.content-container-front,
+.content-container-back {
+    position: absolute;
+    background-color: #dfdfdf;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+    /* gap: 30px; */
+    font-size: 40px;
+    height: 100%;
+    width: 100%;
+    flex-grow: 5;
+    -webkit-backface-visibility: hidden;
+    /* Safari */
+    backface-visibility: hidden;
+}
+
+.content-item {
+    align-self: center;
+}
+
+.content-container-back {
+    background-color: rgb(223, 255, 223);
+    transform: rotateY(180deg);
+
+}
+
+#romanji-text {
+    font-size: 80px;
+}
+
+#phonetic-text {
+    color: #7d7d7d;
+}
+
+
+.container {
+    margin: 20px;
+    padding: 20px;
+    flex-direction: column;
+    align-content: center;
+    height: 80vh;
+    background-color: #0458a6;
+}
+
+.flip-container {
+    perspective: 1000px;
+    /* Remove this if you don't want the 3D effect */
+
+}
+
+.container-cards {
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    height: 60%;
+    width: 90%;
+    background-color: #fbfbfb;
+    align-content: center;
+    flex-direction: column;
+
+}
+
+
+
+
+
+.container2 {
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    /* height: 80%; */
+}
+
+.container-deck {
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #0458a6;
+    justify-content: center;
+}
+
+
+.flex-deck {
+    margin: 30px;
+    background: #dbdbdb;
+
+    flex-basis: 100px;
+    padding: 30px;
+    text-align: center;
+    flex-shrink: 5;
+    color: black;
+
+}
+
+
+
+
+.header {
+    margin-top: 0;
+    margin: 20px;
+    font-size: 2em;
+    display: flex;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    /* Adds a subtle shadow */
+    justify-content: center;
+    background-color: #0458a6;
+    padding: 20px;
+    margin: 0px 0px 20px 0px;
+    gap: 50px;
+}
+
+.flag {
+    /* Makes the image circular */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    box-shadow: 2px 2px 4px rgba(22, 20, 20, 0.5);
+    /* Adds a subtle shadow */
+}
+
+#flex-icon {
+    flex: 20%;
+    justify-content: center;
+    align-items: center;
+}
+
+#flex-title {
+    flex: 90%;
+}
+
+#trophy-icon {
+    height: 70%;
+    width: 70%;
+}
+
+#wallet-error {
+    color: red;
+    background-color: white;
+    display: inline-block;
+
+}

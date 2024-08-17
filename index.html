@@ -2,13 +2,17 @@
 <html>
 
 <head>
-    <title>1 Sol Challenge</title>
+    <title>JPN Tourist Flashcards</title>
     <meta name="theme-color" content="#308f3b">
     <link rel="apple-touch-icon" sizes="128x128" href="icon.png">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Press+Start+2P&display=swap"
+        rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="script.js"></script>
@@ -18,47 +22,68 @@
     <section>
         <div class="header">
             <div id="flex-icon">
-                <img class='pepe'
-                    src="icon.png" />
+                <img class='flag' src="flag.png" />
             </div>
             <div id="flex-title">
-                <h1 id="one-sol-challenge"> 1 Sol Challenge </h1>
+                <h1 id="one-sol-challenge"> JPN Tourist Flashcards </h1>
             </div>
         </div>
 
     </section>
-    <div class="container-form">
-        <div class="flex-empty"></div>
-        <div class="flex-form">
-            <form id="form-wallet-input">
-                <label>Wallet Address:</label> <input type="text" id="name" name="name">
-                <input type="submit" value="Submit">
-                <p id="wallet-error"> </p>
-            </form>
+    <!-- Categories -->
+    <div class="container2">
+
+        <div class="container-deck">
+            <!-- <div class="flex-empty"></div> -->
+            <div class="flex-deck"><b>Essentials</b></div>
+            <div class="flex-deck"><b>Emergency</b></div>
+            <div class="flex-deck"><b>Shopping</b></div>
+            <div class="flex-deck"><b>Time</b></div>
+            <div class="flex-deck"><b>Restaraunt/Food</b></div>
+            <div class="flex-deck"><b>Travel</b></div>
+            <div class="flex-deck"><b>Hotel</b></div>
+            <!-- <div class="flex-empty"></div> -->
         </div>
-        <div class="flex-empty"></div>
     </div>
+   
+    <!-- Flashcards -->
     <div class="container">
-        <div class="flex-empty"></div>
-        <div class="flex-table">
-            <h2>August Leaderboard</h2>
-            <h3 id="countdown"></h3>
-            <table id="wallet-table">
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Nickname</th>
-                        <th>Sol</th>
-                        <th>Wallet</th>
-                    </tr>
-                </thead>
-                <tbody>
 
-                </tbody>
-            </table>
+
+        <div class="flex-empty"></div>
+        <!-- <div class="container-cards"> -->
+        <div class="flex-empty"></div>
+        <div class="flip-container">
+        <div class="flex-cards">
+            Travel
+            <!-- <div class="flashcards"> -->
+            <div class="content-container-front">
+
+                <div class="content-item" id="japanese-text">
+                    遠いですか？ 
+                </div>
+                <div class="content-item" id="romanji-text">
+                     tooi desu ka?
+                </div>
+                <div class="content-item" id="phonetic-text">
+                     toh-ai des-oo kaa
+                </div>
+            </div>
+            <div class="content-container-back">
+
+                
+                <div class="content-item" id="romanji-text">
+                    Where is this?
+                </div>
+                
+            </div>
+            <!-- </div> -->
         </div>
+        
+    </div>
         <div class="flex-empty"></div>
-
+        <!-- </div> -->
+        <div class="flex-empty"></div>
     </div>
 
 </body>
