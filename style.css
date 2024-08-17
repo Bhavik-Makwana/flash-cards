@@ -10,10 +10,13 @@ body {
     font-family: 'Montserrat', cursive;
 
 }
+@media (hover: hover) {
 
 .flip-container:hover .flex-cards {
     transform: rotateY(180deg);
 }
+}
+
 .flex-cards {
     margin: 0 auto;
     /* padding: 20px; */
