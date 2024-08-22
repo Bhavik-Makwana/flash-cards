@@ -63,6 +63,25 @@ $(document).ready(function () {
         if (lastShownIndices.length > flashcards.length) {
             lastShownIndices.pop();
         }
+        // Check if all cards have been reviewed
+        if (lastShownIndices.length === flashcards.length) {
+            console.log("All cards have been reviewed!");
+            // Make a call to the /save_progress post endpoint
+            $.ajax({
+                url: '/save_progress',
+                type: 'POST',
+                data: JSON.stringify({ lastShownIndices: lastShownIndices }),
+                contentType: 'application/json',
+                success: function(response) {
+                    console.log('Progress saved successfully');
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error saving progress:', error);
+                }
+            });
+            // Display a message to the user
+            alert("Congratulations! You've reviewed all the flashcards.");
+        }
 
         return selectedCard.card;
     }
@@ -81,4 +100,27 @@ $(document).ready(function () {
 
     // Update flashcard when the "Next" button is clicked
     $(".button-next").on("click", updateFlashcard);
+    $('.flip-container').on('click', function() {
+        $(this).toggleClass('flipped');
+    });
+    // Add touch event listeners for swipe detection using jQuery
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    $(document).on('touchstart', function(event) {
+        touchStartX = event.originalEvent.touches[0].screenX;
+    });
+    
+    $(document).on('touchend', function(event) {
+        touchEndX = event.originalEvent.changedTouches[0].screenX;
+        handleSwipe();
+    });
+    
+    function handleSwipe() {
+        const swipeThreshold = 100; // Minimum distance for a swipe
+        if (touchStartX - touchEndX > swipeThreshold) {
+            // Swipe left detected
+            alert("Swiped left!");
+        }
+    }
 });
