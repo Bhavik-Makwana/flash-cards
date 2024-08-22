@@ -121,10 +121,12 @@ $(document).ready(function () {
             // Swipe detected (left or right)
             let transform = $(".flex-cards").css("transform");
             console.log(transform);
-            if (transform === "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)" || transform == undefined) {
-                $(".flex-cards").css("transform", "rotateY(0deg)");
-            } else {
+            if (touchEndX < touchStartX) {
+                // Swipe left
                 $(".flex-cards").css("transform", "rotateY(180deg)");
+            } else {
+                // Swipe right
+                $(".flex-cards").css("transform", "rotateY(0deg)");
             }
         }
 
