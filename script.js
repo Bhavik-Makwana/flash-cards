@@ -131,4 +131,35 @@ $(document).ready(function () {
         }
 
     }
+
+
+    const modal = $("#word-list-modal");
+    const btn = $("#open-word-list");
+    const span = $(".close");
+
+    btn.click(function() {
+        modal.css("display", "block");
+        populateWordList();
+    });
+
+    span.click(function() {
+        modal.css("display", "none");
+    });
+
+    $(window).click(function(event) {
+        if (event.target == modal[0]) {
+            modal.css("display", "none");
+        }
+    });
+
+    function populateWordList() {
+        const wordList = $("#word-list");
+        wordList.empty(); // Clear existing items
+
+        // Add your word list here
+
+        flashcards.forEach(word => {
+            wordList.append(`<li>${word[0]} - ${word[1]} - ${word[2]}</li>`);
+        });
+    }
 });

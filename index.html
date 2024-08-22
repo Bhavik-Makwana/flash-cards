@@ -30,18 +30,31 @@
         </div>
 
     </section>
+    <section class="intro-section">
+        <div class="container">
+            <h2>Welcome to JPN Tourist Flashcards</h2>
+            <p>This website is designed for tourists planning to visit Japan or those interested in learning essential Japanese phrases for travel. Our flashcards cover a variety of categories to help you communicate effectively during your trip.</p>
+            <p>Whether you're a first-time visitor or returning traveler, these flashcards will help you:</p>
+            <ul>
+                <li>Learn basic Japanese phrases for everyday situations</li>
+                <li>Navigate common tourist scenarios with confidence</li>
+                <li>Enhance your cultural experience by communicating with locals</li>
+            </ul>
+            <p>Choose a category below to start practicing, and flip the cards to see translations and pronunciations. Happy learning, and enjoy your Japanese adventure!</p>
+        </div>
+    </section>
     <!-- Categories -->
     <div class="container2">
 
         <div class="container-deck">
             <!-- <div class="flex-empty"></div> -->
-            <div class="flex-deck"><b>Essentials</b></div>
-            <div class="flex-deck"><b>Emergency</b></div>
-            <div class="flex-deck"><b>Shopping</b></div>
-            <div class="flex-deck"><b>Time</b></div>
-            <div class="flex-deck"><b>Restaraunt/Food</b></div>
-            <div class="flex-deck"><b>Travel</b></div>
-            <div class="flex-deck"><b>Hotel</b></div>
+            <button class="flex-deck"><b>Essentials</b></button>
+            <button class="flex-deck"><b>Emergency</b></button>
+            <button class="flex-deck"><b>Shopping</b></button>
+            <button class="flex-deck"><b>Time</b></button>
+            <button class="flex-deck"><b>Restaraunt/Food</b></button>
+            <button class="flex-deck"><b>Travel</b></button>
+            <button class="flex-deck"><b>Hotel</b></button>
             <!-- <div class="flex-empty"></div> -->
         </div>
     </div>
@@ -51,6 +64,8 @@
 
         <div class="flex-button">
             <!-- <button class="button-flip">FLIP</button> -->
+            <button class="button" id="open-word-list">Show Word List</button>
+        
             <button class="button-next">NEXT</button>
         </div>
         <!-- <div class="container-cards"> -->
@@ -85,7 +100,15 @@
         <div class="flex-empty"></div>
         <!-- </div> -->
     </div>
-
+    <div id="word-list-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Available Words</h2>
+            <ul id="word-list">
+                <!-- Word list items will be dynamically added here -->
+            </ul>
+        </div>
+    </div>
 </body>
 
 </html>

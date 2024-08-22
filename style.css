@@ -29,8 +29,21 @@ body {
     --container-color: #E0F2F1; /* Lighter teal for container, complementing the theme */
 }
 
+.flex-deck {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 15px 25px;
+    flex: 1 0 auto;
+    min-width: 120px;
+    max-width: 200px;
+}
+button {
+    background-color: var(--button-color);
+}
 /* Modern button styles */
-.button-flip, .button-next {
+button, .button-flip, .button-next, .flex-deck {
     background-color: var(--button-color);
     color: var(--text-color);
     border: none;
@@ -45,13 +58,13 @@ body {
     letter-spacing: 1px;
 }
 
-.button-flip:hover, .button-next:hover {
+button:hover, .button-flip:hover, .button-next:hover, .flex-deck:hover {
     background-color: var(--button-color);
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
-.button-flip:active, .button-next:active {
+button:hover, .button-flip:active, .button-next:active, .flex-deck:active {
     transform: translateY(1px);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
@@ -193,15 +206,6 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.flex-deck {
-    margin: 30px;
-    background: var(--button-color);
-    flex-basis: 100px;
-    padding: 30px;
-    text-align: center;
-    flex-shrink: 5;
-    color: black;
-}
 
 .header {
     margin: 0px 0px 20px 0px;
@@ -231,3 +235,42 @@ body {
 #flex-title {
     flex: 90%;
 }
+
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: var(--card-color);
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
