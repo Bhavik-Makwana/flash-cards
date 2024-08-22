@@ -1,12 +1,12 @@
 html {
-    background-color: #ebebeb;
+    background-color: var(--background-color);
 }
 
 body {
     margin-top: 0;
     height: 100%;
     margin: 0;
-    color: #fff;
+    color: var(--text-color);
     font-family: 'Montserrat', cursive;
 
 }
@@ -17,13 +17,23 @@ body {
 }
 }
 :root {
-    --primary-color: #1c76b2;
+    /* --primary-color: #1c76b2; */
+    --primary-color: #E57373; /* Softer coral for a more subtle energy */
+    --secondary-color: #80CBC4; /* Muted teal for a calmer focus */
+    --accent-color: #FFF59D; /* Pale yellow for subtle positivity */
+    --text-color: #37474F; /* Darker blue-gray for improved readability */
+    --background-color: #FAFBFC; /* Very light blue-gray for a clean, modern look */
+    --card-color: #FFFFFF; /* White for card backgrounds */
+    --success-color: #81C784; /* Softer green for positive feedback */
+    --error-color: #E57373; /* Muted red for alerts or errors */
+    --button-color: #80CBC4; /* Muted teal color for buttons, matching the secondary color */
+    --container-color: #E0F2F1; /* Lighter teal for container, complementing the theme */
 }
 
 /* Modern button styles */
 .button-flip, .button-next {
-    background-color: var(--primary-color);
-    color: #ffffff;
+    background-color: var(--button-color);
+    color: var(--text-color);
     border: none;
     padding: 12px 25px;
     font-size: 1rem;
@@ -37,7 +47,7 @@ body {
 }
 
 .button-flip:hover, .button-next:hover {
-    background-color: #2980b9;
+    background-color: var(--button-color);
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
@@ -84,7 +94,7 @@ body {
     display: flex;
     height: 100%;
     width: 100%;
-    background-color: #fbfbfb;
+    background-color: var(--card-color);
     color: black;
     transition: transform 0.5s;
     transform-style: preserve-3d;
@@ -114,21 +124,20 @@ body {
 .content-container-front,
 .content-container-back {
     position: absolute;
-    background-color: #dfdfdf;
+    background-color: var(--card-color);
     display: flex;
     flex-direction: column;
     justify-content: center;
     justify-content: space-evenly;
     align-items: center;
     align-content: center;
-    /* gap: 30px; */
     font-size: 40px;
     height: 100%;
     width: 100%;
     flex-grow: 5;
     -webkit-backface-visibility: hidden;
-    /* Safari */
     backface-visibility: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .content-item {
@@ -136,7 +145,7 @@ body {
 }
 
 .content-container-back {
-    background-color: rgb(223, 255, 223);
+    background-color: var(--success-color);
     transform: rotateY(180deg);
 
 }
@@ -146,7 +155,7 @@ body {
 }
 
 #phonetic-text {
-    color: #7d7d7d;
+    color: var(--text-color);
 }
 
 
@@ -157,7 +166,7 @@ body {
     flex-direction: column;
     align-content: center;
     height: 80vh;
-    background-color: #0458a6;
+    background-color: var(--container-color);
 }
 
 .flip-container {
@@ -194,14 +203,15 @@ body {
     padding: 20px;
     display: flex;
     flex-wrap: wrap;
-    background-color: #0458a6;
+    background-color: var(--container-color);
     justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 
 .flex-deck {
     margin: 30px;
-    background: #dbdbdb;
+    background: var(--button-color);
 
     flex-basis: 100px;
     padding: 30px;
@@ -222,7 +232,7 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     /* Adds a subtle shadow */
     justify-content: center;
-    background-color: #0458a6;
+    background-color: var(--primary-color);
     padding: 20px;
     margin: 0px 0px 20px 0px;
     gap: 50px;
@@ -246,16 +256,4 @@ body {
 
 #flex-title {
     flex: 90%;
-}
-
-#trophy-icon {
-    height: 70%;
-    width: 70%;
-}
-
-#wallet-error {
-    color: red;
-    background-color: white;
-    display: inline-block;
-
 }
