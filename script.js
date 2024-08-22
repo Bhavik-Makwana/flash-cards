@@ -119,29 +119,17 @@ $(document).ready(function () {
         const swipeThreshold = 100; // Minimum distance for a swipe
         if (Math.abs(touchStartX - touchEndX) > swipeThreshold) {
             // Swipe detected (left or right)
-            let currentRotation = $(".flex-cards").css("transform");
-            let angle = 0;
-            
-            if (currentRotation !== "none") {
-                // Extract the current rotation angle
-                let matrix = currentRotation.split('(')[1].split(')')[0].split(',');
-                angle = Math.round(Math.atan2(matrix[1], matrix[0]) * (180/Math.PI));
-            }
-            
+            let transform = $(".flex-cards").css("transform");
+            console.log(transform);
             if (touchEndX < touchStartX) {
                 // Swipe left
-                angle += 180;
+                $(".flex-cards").css("transform", "rotateY(180deg)");
             } else {
                 // Swipe right
-                angle -= 180;
+                $(".flex-cards").css("transform", "rotateY(0deg)");
             }
-            
-            // Normalize angle to be between 0 and 360
-            angle = (angle + 360) % 360;
-            
-            $(".flex-cards").css("transform", `rotateY(${angle}deg)`);
         }
-    }
+
     }
 
 
