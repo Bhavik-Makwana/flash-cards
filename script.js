@@ -100,9 +100,8 @@ $(document).ready(function () {
 
     // Update flashcard when the "Next" button is clicked
     $(".button-next").on("click", updateFlashcard);
-    $('.flip-container').on('click', function() {
-        $(this).toggleClass('flipped');
-    });
+    
+    
     // Add touch event listeners for swipe detection using jQuery
     let touchStartX = 0;
     let touchEndX = 0;
@@ -118,9 +117,16 @@ $(document).ready(function () {
     
     function handleSwipe() {
         const swipeThreshold = 100; // Minimum distance for a swipe
-        if (touchStartX - touchEndX > swipeThreshold) {
-            // Swipe left detected
-            alert("Swiped left!");
+        if (Math.abs(touchStartX - touchEndX) > swipeThreshold) {
+            // Swipe detected (left or right)
+            let transform = $(".flex-cards").css("transform");
+            console.log(transform);
+            if (transform === "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)" || transform == undefined) {
+                $(".flex-cards").css("transform", "rotateY(0deg)");
+            } else {
+                $(".flex-cards").css("transform", "rotateY(180deg)");
+            }
         }
+
     }
 });
