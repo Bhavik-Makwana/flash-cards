@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>JPN Tourist Flashcards</title>
+    <meta name="theme-color" content="#308f3b">
+    <link rel="apple-touch-icon" sizes="128x128" href="icon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="landing.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Press+Start+2P&display=swap"
+        rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="flag.png" alt="Japanese Flag" class="flag">
+                <h1>JPN Tourist Flashcards</h1>
+            </div>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#start">Get Started</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="intro-section">
+        <div class="container" id="intro-container">
+            <h2>Welcome to JPN Tourist Flashcards</h2>
+            <p>This website is designed for tourists planning to visit Japan or those interested in learning essential Japanese phrases for travel. Our flashcards cover a variety of categories to help you communicate effectively during your trip.</p>
+            <p>Whether you're a first-time visitor or returning traveler, these flashcards will help you:</p>
+            <ul>
+                <li>Learn basic Japanese phrases for everyday situations</li>
+                <li>Navigate common tourist scenarios with confidence</li>
+                <li>Enhance your cultural experience by communicating with locals</li>
+            </ul>
+            <p>Choose a category below to start practicing, and flip the cards to see translations and pronunciations. Happy learning, and enjoy your Japanese adventure!</p>
+        </div>
+    </section>
+    <!-- Categories -->
+    <div class="container2">
+
+        <div class="container-deck">
+            <!-- <div class="flex-empty"></div> -->
+            <button class="flex-deck"><b>Essentials</b></button>
+            <button class="flex-deck"><b>Emergency</b></button>
+            <button class="flex-deck"><b>Shopping</b></button>
+            <button class="flex-deck"><b>Time</b></button>
+            <button class="flex-deck"><b>Restaraunt/Food</b></button>
+            <button class="flex-deck"><b>Travel</b></button>
+            <button class="flex-deck"><b>Hotel</b></button>
+            <!-- <div class="flex-empty"></div> -->
+        </div>
+    </div>
+   
+    <!-- Flashcards -->
+    <div class="container">
+
+        <div class="flex-button">
+            <!-- <button class="button-flip">FLIP</button> -->
+            <button class="button" id="open-word-list">Show Word List</button>
+        
+            <button class="button-next">NEXT</button>
+        </div>
+        <!-- <div class="container-cards"> -->
+        <div class="flip-container">
+        <div class="flex-cards">
+            <!-- <div class="flashcards"> -->
+            <div class="content-container-front">
+                <div class="flex-cards-title">Travel</div>
+                <div class="content-item" id="japanese-text">
+                    遠いですか？ 
+                </div>
+                <div class="content-item" id="romanji-text">
+                     tooi desu ka?
+                </div>
+                <div class="content-item" id="phonetic-text">
+                     toh-ai des-oo kaa
+                </div>
+            </div>
+            <div class="content-container-back">
+
+                
+                <div class="content-item" id="english-text">
+                    Where is this?
+                </div>
+                
+            </div>
+            <!-- </div> -->
+        </div>
+        
+    </div>
+        <div class="flex-empty"></div>
+        <!-- </div> -->
+    </div>
+    <div id="word-list-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Available Words</h2>
+            <ul id="word-list">
+                <!-- Word list items will be dynamically added here -->
+            </ul>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 JPN Tourist Flashcards. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
