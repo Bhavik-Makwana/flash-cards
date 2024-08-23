@@ -6,6 +6,7 @@
     <meta name="theme-color" content="#308f3b">
     <link rel="apple-touch-icon" sizes="128x128" href="icon.png">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="landing.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,19 +20,22 @@
 </head>
 
 <body>
-    <section>
-        <div class="header">
-            <div id="flex-icon">
-                <img class='flag' src="flag.png" />
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="flag.png" alt="Japanese Flag" class="flag">
+                <h1>JPN Tourist Flashcards</h1>
             </div>
-            <div id="flex-title">
-                <h1 id="one-sol-challenge"> JPN Tourist Flashcards </h1>
-            </div>
-        </div>
-
-    </section>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#start">Get Started</a></li>
+            </ul>
+        </nav>
+    </header>
     <section class="intro-section">
-        <div class="container">
+        <div class="container" id="intro-container">
             <h2>Welcome to JPN Tourist Flashcards</h2>
             <p>This website is designed for tourists planning to visit Japan or those interested in learning essential Japanese phrases for travel. Our flashcards cover a variety of categories to help you communicate effectively during your trip.</p>
             <p>Whether you're a first-time visitor or returning traveler, these flashcards will help you:</p>
@@ -71,10 +75,9 @@
         <!-- <div class="container-cards"> -->
         <div class="flip-container">
         <div class="flex-cards">
-            Travel
             <!-- <div class="flashcards"> -->
             <div class="content-container-front">
-
+                <div class="flex-cards-title">Travel</div>
                 <div class="content-item" id="japanese-text">
                     遠いですか？ 
                 </div>
@@ -109,6 +112,9 @@
             </ul>
         </div>
     </div>
+    <footer>
+        <p>&copy; 2024 JPN Tourist Flashcards. All rights reserved.</p>
+    </footer>
 </body>
 
 </html>

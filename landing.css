@@ -1,0 +1,256 @@
+/* Global Styles */
+:root {
+    --primary-color: #E57373; /* Soft coral */
+    --secondary-color: #80CBC4; /* Muted teal */
+    --accent-color: #c1ddcf; /* Gold */
+    --text-color: #37474F; /* Dark blue-gray */
+    --background-color: #FAFBFC; /* Very light blue-gray */
+    --card-color: #FFFFFF; /* White */
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styles */
+header {
+    background-color: var(--primary-color);
+    padding: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+button, .button-flip, .button-next, .flex-deck {
+    background-color: var(--button-color);
+    color: var(--text-color);
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+button:hover, .button-flip:hover, .button-next:hover, .flex-deck:hover {
+    background-color: var(--button-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+button:hover, .button-flip:active, .button-next:active, .flex-deck:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 40px;
+    margin-right: 1rem;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    color: white;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 2rem;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: var(--accent-color);
+}
+
+/* Main Content Styles */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+section {
+    margin-bottom: 4rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #5f9ea0;
+}
+
+/* Hero Section */
+#hero {
+    text-align: center;
+    padding: 4rem 0;
+    background-color: var(--accent-color);
+    border-radius: 10px;
+    margin-bottom: 4rem;
+}
+
+#hero h2 {
+    font-size: 3rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+/* Features Section */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.feature-item {
+    background-color: var(--card-color);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+}
+
+.feature-item h3 {
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+/* Categories Section */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.category-item {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.category-item:hover {
+    background-color: #5f9ea0;
+}
+
+/* Footer Styles */
+footer {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 4rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav ul {
+        margin-top: 1rem;
+    }
+
+    nav ul li {
+        margin: 0 1rem;
+    }
+
+    #hero h2 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Login Page Styles */
+.login-container {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--card-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+.login-form input {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.login-form button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.login-form button:hover {
+    background-color: #d35f5f;
+}

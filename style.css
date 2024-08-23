@@ -94,7 +94,9 @@ button:hover, .button-flip:active, .button-next:active, .flex-deck:active {
         transform: rotateY(180deg);
     }
 }
-
+.flip-container {
+    border-radius: 40px; /* Added to round corners */
+}
 .flex-cards {
     margin: 0 auto;
     display: flex;
@@ -104,6 +106,7 @@ button:hover, .button-flip:active, .button-next:active, .flex-deck:active {
     color: black;
     transition: transform 0.5s;
     transform-style: preserve-3d;
+    border-radius: 40px; /* Added to round corners */
 }
 
 .flex-empty {
@@ -143,6 +146,13 @@ button:hover, .button-flip:active, .button-next:active, .flex-deck:active {
     padding: 20px; /* Added padding */
     box-sizing: border-box; /* Ensure padding is included in element's total width and height */
     overflow: auto; /* Allow scrolling if content overflows */
+    border-radius: 40px; /* Added to round corners */
+}
+
+.flex-cards-title {
+    font-size: 8px; /* Reduced font size */
+    font-weight: bold;
+    text-align: left;
 }
 
 .content-item {
@@ -163,6 +173,49 @@ button:hover, .button-flip:active, .button-next:active, .flex-deck:active {
 #phonetic-text {
     color: var(--text-color);
     font-size: 18px; /* Smaller font size for phonetic text */
+}
+
+#english-text {
+    font-size: 36px; /* Smaller font size for phonetic text */
+}
+
+#intro-container {
+    background-color: var(--container-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: fit-content;
+    height: fit-content;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    #intro-container {
+        padding: 15px;
+    }
+
+    #intro-container h2 {
+        font-size: 1.5em;
+    }
+
+    #intro-container p, #intro-container ul {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    #intro-container {
+        padding: 10px;
+    }
+
+    #intro-container h2 {
+        font-size: 1.3em;
+    }
+
+    #intro-container p, #intro-container ul {
+        font-size: 0.8em;
+    }
 }
 
 .container {
@@ -251,7 +304,7 @@ button:hover, .button-flip:active, .button-next:active, .flex-deck:active {
 }
 
 .modal-content {
-    background-color: var(--card-color);
+    background-color:;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
