@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - JPN Tourist Flashcards</title>
     <link rel="stylesheet" href="landing.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -14,11 +16,16 @@
                 <img src="flag.png" alt="Japanese Flag" class="flag">
                 <h1>JPN Tourist Flashcards</h1>
             </div>
-            <ul>
-                <li><a href="landing.html">Home</a></li>
-                <li><a href="landing.html#about">About</a></li>
-                <li><a href="landing.html#features">Features</a></li>
-                <li><a href="landing.html#categories">Categories</a></li>
+            <div class="hamburger-menu">
+                <i class="fas fa-bars"></i>
+                <img src="menu_icon.svg" alt="Menu Icon" class="menu-icon">
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#categories">Categories</a></li>
+                <li><a href="index.html#getstarted">Get Started</a></li>
+                
             </ul>
         </nav>
     </header>
@@ -56,5 +63,5 @@
     <footer>
         <p>&copy; 2024 JPN Tourist Flashcards. All rights reserved.</p>
     </footer>
-</body>
+    </body>
 </html>

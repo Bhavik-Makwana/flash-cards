@@ -162,4 +162,58 @@ $(document).ready(function () {
             wordList.append(`<li>${word[0]} - ${word[1]} - ${word[2]}</li>`);
         });
     }
+
+
+    // Hamburger menu
+    const hamburger = document.querySelector('.hamburger-menu');
+        const navLinks = document.querySelector('.nav-links');
+        const closeButton = document.createElement('button');
+
+        function toggleMenu() {
+            navLinks.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            navLinks.classList.remove('active');
+        }
+
+        function isHamburgerMenuDisplayed() {
+            return window.getComputedStyle(hamburger).display !== 'none';
+        }
+
+        function toggleCloseButton() {
+            closeButton.style.display = isHamburgerMenuDisplayed() ? 'block' : 'none';
+        }
+
+        function initCloseButton() {
+            closeButton.textContent = 'X';
+            closeButton.classList.add('close-button');
+            navLinks.appendChild(closeButton);
+        }
+
+        function addEventListeners() {
+            hamburger.addEventListener('click', toggleMenu);
+            
+            document.addEventListener('click', (event) => {
+                if (!hamburger.contains(event.target) && !navLinks.contains(event.target)) {
+                    closeMenu();
+                }
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
+
+            closeButton.addEventListener('click', closeMenu);
+
+            window.addEventListener('resize', toggleCloseButton);
+        }
+
+        function init() {
+            initCloseButton();
+            toggleCloseButton();
+            addEventListeners();
+        }
+
+    init();
 });
