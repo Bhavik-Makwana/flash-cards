@@ -17,15 +17,17 @@ body {
 }
 
 :root {
-    --primary-color: #E57373; /* Softer coral for a more subtle energy */
-    --secondary-color: #80CBC4; /* Muted teal for a calmer focus */
-    --accent-color: #FFF59D; /* Pale yellow for subtle positivity */
-    --text-color: #37474F; /* Darker blue-gray for improved readability */
+    --primary-color: #e15353; /* Softer coral for a more subtle energy */
+    --secondary-color: #a94040; /* Muted teal for a calmer focus */
+    --complementary-color: #72c9c9; /* Muted teal for a calmer focus */
+    --accent-color: #DD6E6E; /* Gold */
+    --text-color: #eeeeee; /* Darker blue-gray for improved readability */
+    --text-color-dark: #37474F; /* Darker blue-gray for improved readability */
     --background-color: #FAFBFC; /* Very light blue-gray for a clean, modern look */
     --card-color: #FFFFFF; /* White for card backgrounds */
     --success-color: #81C784; /* Softer green for positive feedback */
     --error-color: #E57373; /* Muted red for alerts or errors */
-    --button-color: #80CBC4; /* Muted teal color for buttons, matching the secondary color */
+    --button-color: #ae3f3f; /* Muted teal color for buttons, matching the secondary color */
     --container-color: #E0F2F1; /* Lighter teal for container, complementing the theme */
 }
 
@@ -64,7 +66,7 @@ button:hover, .button-flip:hover, .button-next:hover, .flex-deck:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
-button:hover, .button-flip:active, .button-next:active, .flex-deck:active {
+button:active, .button-flip:active, .button-next:active, .flex-deck:active {
     transform: translateY(1px);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
