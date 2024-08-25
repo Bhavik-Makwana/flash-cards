@@ -14,6 +14,16 @@
     <link rel="icon" href="../assets/white-logo.png" type="image/png">
     <link rel="shortcut icon" href="../assets/white-logo.png" type="image/png">
 </head>
+<script type="module">
+    import { isLoggedIn } from '../javascript/auth.js';
+
+    $(document).ready(function() {
+        console.log("isLoggedIn", isLoggedIn());
+        if (!isLoggedIn()) {
+            // window.location.href = '../index.html';
+        }
+    });
+</script>
 
 <body>
     <header>

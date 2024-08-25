@@ -15,6 +15,9 @@ func AuthenticationMiddleware(next http.HandlerFunc) http.HandlerFunc {
 			return
 		}
 		ctx := context.WithValue(r.Context(), "user", user)
+		log.Println("user", user)
+		// ctx = context.WithValue(ctx, "token", token)
+
 		next.ServeHTTP(w, r.WithContext(ctx))
 	}
 }

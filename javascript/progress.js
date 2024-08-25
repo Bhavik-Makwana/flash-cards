@@ -24,7 +24,7 @@ function updateProgressBar(category) {
     // Get the current width value as a percentage
     const currentWidth = (progressBar.width() / progressBar.parent().width()) * 100;
     // Log the width for debugging purposes
-    console.log(`Current width of ${category} progress bar: ${currentWidth.toFixed(2)}%`);
+    // console.log(`Current width of ${category} progress bar: ${currentWidth.toFixed(2)}%`);
     if (currentWidth === 100) {
         progressBar.css('background-color', '#4CAF50'); // Green color
     } else if (currentWidth >= 50 && currentWidth < 100) {
