@@ -3,7 +3,10 @@ package auth
 import (
 	"database/sql"
 	"encoding/json"
+	"flashcards/pkg/config"
 	"flashcards/pkg/models"
+	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"strings"
@@ -17,6 +20,41 @@ type AuthHandler struct {
 	models.Handler
 }
 
+func GetUserFromToken(r *http.Request) (models.User, error) {
+	authHeader := r.Header.Get("Authorization")
+	if authHeader == "" {
+		return models.User{}, fmt.Errorf("unauthorized")
+	}
+
+	bearerToken := strings.Split(authHeader, " ")
+	if len(bearerToken) != 2 {
+		return models.User{}, fmt.Errorf("unauthorized")
+	}
+
+	token, err := jwt.Parse(bearerToken[1], func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, jwt.ErrSignatureInvalid
+		}
+		return config.SecretKey, nil
+	})
+
+	if err != nil {
+		return models.User{}, fmt.Errorf("unauthorized")
+	}
+
+	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+		exp := claims["exp"].(float64)
+		if int64(exp) < time.Now().Unix() {
+			return models.User{}, fmt.Errorf("token expired")
+		}
+		username := claims["username"].(string)
+		log.Printf("Username: %s", username)
+		return models.User{Username: username, Token: token}, nil
+	}
+
+	return models.User{}, fmt.Errorf("unauthorized")
+}
+
 func (h *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
@@ -28,11 +66,20 @@ func (h *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
 		Password string `json:"password"`
 	}
 
-	err := json.NewDecoder(r.Body).Decode(&credentials)
+	body, err := io.ReadAll(r.Body)
 	if err != nil {
+		log.Printf("Error reading request body: %v", err)
 		http.Error(w, "Invalid request body", http.StatusBadRequest)
 		return
 	}
+	log.Printf("Received body: %s", body)
+	err = json.Unmarshal(body, &credentials)
+	if err != nil {
+		log.Printf("Error unmarshalling request body: %v", err)
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
+		return
+	}
+	log.Printf("Credentials: %v", credentials)
 
 	// Check if user exists in database
 	var storedPassword []byte
@@ -112,7 +159,7 @@ func generateToken(username string) string {
 	})
 
 	// Sign the token with a secret key
-	secretKey := []byte("your-secret-key") // Replace with a secure secret key
+	secretKey := config.SecretKey
 	tokenString, err := token.SignedString(secretKey)
 	if err != nil {
 		log.Printf("Error generating token: %v", err)

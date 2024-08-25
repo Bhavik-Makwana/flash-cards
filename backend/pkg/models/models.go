@@ -1,6 +1,10 @@
 package models
 
-import "database/sql"
+import (
+	"database/sql"
+
+	"github.com/golang-jwt/jwt/v4"
+)
 
 type Word struct {
 	ID       int    `json:"id"`
@@ -11,4 +15,11 @@ type Word struct {
 }
 type Handler struct {
 	DB *sql.DB
+}
+
+type User struct {
+	ID       int        `json:"id"`
+	Username string     `json:"username"`
+	Password string     `json:"-"` // The "-" tag ensures the password is not included in JSON output
+	Token    *jwt.Token `json:"-"`
 }
