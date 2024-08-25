@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Tracker - JPN Tourist Flashcards</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/landing.css">
+    <link rel="stylesheet" href="../css/progress.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../javascript/script.js" type="module" defer></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="../assets/flag.png" alt="Japanese Flag" class="flag">
+                <h1><a href="../index.html" style="text-decoration: none; color: inherit;">JPN Tourist Flashcards</a>
+                </h1>
+            </div>
+            <div class="hamburger-menu">
+                <img src="../assets/menu_icon.svg" alt="Menu Icon" class="menu-icon">
+            </div>
+            <ul class="nav-links">
+                <li><a href="cards.html"><button class="start-button">Flashcards</button></a></li>
+                <li><a href="login.html"><button class="login-button">Login</button></a></li>
+                <li><a href="progress.html"><button class="progress-button">Progress</button></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Your Progress</h2>
+
+        <div class="progress-container">
+            <div class="category-overview  overview-container">
+                <div class="overview-container-flex">
+                    <div class="pie-chart-container">
+                        <h3>Category Overview</h3>
+                        <canvas id="category-pie-chart"></canvas>
+                    </div>
+
+                </div>
+                <div class="overview-container-flex">
+                    <h3>Overall Statistics</h3>
+                    <div class="stats-container">
+                        <div class="stats-column">
+                            <p>Total Words Practiced: <span id="total-words-practiced">0</span> </p>
+                            <p>Total Correct Answers: <span id="total-correct-answers">0</span> </p>
+                        <p>Accuracy Rate: <span id="accuracy-rate">0%</span> </p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+               
+            </script>
+        
+            <div class="category-progress">
+                <div class="category-header" onclick="toggleWordList('essentials')">
+                    <h3>Essentials</h3>
+                    <span class="toggle-icon">&#9660;</span>
+                </div>
+                <div class="progress-bar" id="essentials-progress"></div>
+                <p>Words Mastered: <span id="essentials-mastered">0</span></p>
+                <div class="word-list" id="essentials-word-list" style="display: none;">
+                    <!-- Word list will be populated dynamically -->
+                </div>
+            </div>
+            <div class="category-progress">
+                <div class="category-header" onclick="toggleWordList('emergency')">
+                    <h3>Emergency</h3>
+                    <span class="toggle-icon">&#9660;</span>
+                </div>
+                <div class="progress-bar" id="emergency-progress"></div>
+                <p>Words Mastered: <span id="emergency-mastered">0</span></p>
+                <div class="word-list" id="emergency-word-list" style="display: none;">
+                    <!-- Word list will be populated dynamically -->
+                </div>
+            </div>
+            <div class="category-progress">
+                <div class="category-header" onclick="toggleWordList('shopping')">
+                    <h3>Shopping</h3>
+                    <span class="toggle-icon">&#9660;</span>
+                </div>
+                <div class="progress-bar" id="shopping-progress"></div>
+                <p>Words Mastered: <span id="shopping-mastered">0</span></p>
+                <div class="word-list" id="shopping-word-list" style="display: none;">
+                    <!-- Word list will be populated dynamically -->
+                </div>
+            </div>
+            <div class="category-progress">
+                <div class="category-header" onclick="toggleWordList('time')">
+                    <h3>Time</h3>
+                    <span class="toggle-icon">&#9660;</span>
+                </div>
+                <div class="progress-bar" id="time-progress"></div>
+                <p>Words Mastered: <span id="time-mastered">0</span></p>
+                <div class="word-list" id="time-word-list" style="display: none;">
+                    <!-- Word list will be populated dynamically -->
+                </div>
+            </div>
+            <div class="category-progress">
+                <div class="category-header" onclick="toggleWordList('dining')">
+                    <h3>Dining</h3>
+                    <span class="toggle-icon">&#9660;</span>
+                </div>
+                <div class="progress-bar" id="dining-progress"></div>
+                <p>Words Mastered: <span id="dining-mastered">0</span></p>
+                <div class="word-list" id="dining-word-list" style="display: none;">
+                    <!-- Word list will be populated dynamically -->
+                </div>
+            </div>
+            <div class="category-progress">
+                <div class="category-header" onclick="toggleWordList('travel')">
+                    <h3>Travel</h3>
+                    <span class="toggle-icon">&#9660;</span>
+                </div>
+                <div class="progress-bar" id="travel-progress"></div>
+                <p>Words Mastered: <span id="travel-mastered">0</span></p>
+                <div class="word-list" id="travel-word-list" style="display: none;">
+                    <!-- Word list will be populated dynamically -->
+                </div>
+            </div>
+            <div class="category-progress">
+                <div class="category-header" onclick="toggleWordList('hotel')">
+                    <h3>Hotel</h3>
+                    <span class="toggle-icon">&#9660;</span>
+                </div>
+                <div class="progress-bar" id="hotel-progress"></div>
+                <p>Words Mastered: <span id="hotel-mastered">0</span></p>
+                <div class="word-list" id="hotel-word-list" style="display: none;">
+                    <!-- Word list will be populated dynamically -->
+                </div>
+            </div>
+            <div class="category-progress">
+                <div class="category-header" onclick="toggleWordList('culture')">
+                    <h3>Culture</h3>
+                    <span class="toggle-icon">&#9660;</span>
+                </div>
+                <div class="progress-bar" id="culture-progress"></div>
+                <p>Words Mastered: <span id="culture-mastered">0</span></p>
+                <div class="word-list" id="culture-word-list" style="display: none;">
+                    <!-- Word list will be populated dynamically -->
+                </div>
+            </div>
+            <div class="category-progress">
+                <div class="category-header" onclick="toggleWordList('photography')">
+                    <h3>Photography</h3>
+                    <span class="toggle-icon">&#9660;</span>
+                </div>
+                <div class="progress-bar" id="photography-progress"></div>
+                <p>Words Mastered: <span id="photography-mastered">0</span></p>
+                <div class="word-list" id="photography-word-list" style="display: none;">
+                    <!-- Word list will be populated dynamically -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 JPN Tourist Flashcards. All rights reserved.</p>
+    </footer>
+
+    <script src="../javascript/progress.js" type="module" defer></script>
+</body>
+
+</html>

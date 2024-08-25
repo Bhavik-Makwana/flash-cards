@@ -16,9 +16,9 @@
         rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script src="../javascript/script.js"></script>
+    <script src="../javascript/script.js" type="module" defer></script>
 </head>
-<script type="module">
+<!-- <script type="module">
     import { isLoggedIn } from '../javascript/auth.js';
 
     $(document).ready(function() {
@@ -26,7 +26,7 @@
             window.location.href = '../index.html';
         }
     });
-</script>
+</script> -->
 
 <body>
     <header>
@@ -41,10 +41,11 @@
             <ul class="nav-links">
                 <li><a href="index.html"><button class="start-button">Get Started</button></a></li>
                 <li><a href="login.html"><button class="login-button">Login</button></a></li>
+                <li><a href="progress.html"><button class="progress-button">Progress</button></a></li>
             </ul>
         </nav>
     </header>
-    
+
     <!-- Categories -->
     <div class="container2">
 
@@ -60,44 +61,52 @@
             <!-- <div class="flex-empty"></div> -->
         </div>
     </div>
-   
+
     <!-- Flashcards -->
     <div class="container">
 
         <div class="flex-button">
             <!-- <button class="button-flip">FLIP</button> -->
-            <button class="button" id="open-word-list">Show Word List</button>
-        
-            <button class="button-next">NEXT</button>
+
         </div>
         <!-- <div class="container-cards"> -->
         <div class="flip-container">
-        <div class="flex-cards">
-            <!-- <div class="flashcards"> -->
-            <div class="content-container-front">
-                <div class="flex-cards-title">Travel</div>
-                <div class="content-item" id="japanese-text">
-                    遠いですか？ 
+            <div class="flex-cards">
+                <!-- <div class="flashcards"> -->
+                <div class="content-container-front">
+                    <div class="flex-cards-title">Travel</div>
+                    <div class="content-item" id="japanese-text">
+                        遠いですか？ 
+                    </div>
+                    <div class="content-item" id="romanji-text">
+                         tooi desu ka?
+                    </div>
+                    <div class="content-item" id="phonetic-text">
+                         toh-ai des-oo kaa
+                    </div>
                 </div>
-                <div class="content-item" id="romanji-text">
-                     tooi desu ka?
-                </div>
-                <div class="content-item" id="phonetic-text">
-                     toh-ai des-oo kaa
-                </div>
-            </div>
-            <div class="content-container-back">
+                <div class="content-container-back">
 
-                
-                <div class="content-item" id="english-text">
-                    Where is this?
+
+                    <div class="content-item" id="english-text">
+                        Where is this?
+                    </div>
+
                 </div>
-                
+                <!-- </div> -->
             </div>
-            <!-- </div> -->
+
+
         </div>
-        
-    </div>
+        <div class="flex-button">
+            <!-- <button class="button-flip">FLIP</button> -->
+            <button class="button-correct" style="background-color: transparent;">✅</button>
+            <button class="button-incorrect" style="background-color: transparent;">❌</button>
+        </div>
+        <div class ="flex-button">
+            <button class="button" id="open-word-list">Show Word List</button>
+
+        </div>
         <div class="flex-empty"></div>
         <!-- </div> -->
     </div>

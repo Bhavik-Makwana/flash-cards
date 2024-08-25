@@ -75,7 +75,7 @@ button:active, .button-flip:active, .button-next:active, .flex-deck:active {
     display: flex;
     justify-content: center;
     gap: 20px;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
 }
 
 /* Responsive adjustments */
@@ -118,16 +118,16 @@ button:active, .button-flip:active, .button-next:active, .flex-deck:active {
 
 .flex-button {
     flex-grow: 1;
-    margin: 50px;
     width: 50%;
     height: 10%;
     align-self: center;
     justify-content: center;
     align-items: center;
+    gap: 10px; /* Reduced gap between flex-buttons */
 }
 
 .flip-container {
-    height: 50%;
+    height: 90%;
     margin: 10px 50px;
 }
 
@@ -169,16 +169,42 @@ button:active, .button-flip:active, .button-next:active, .flex-deck:active {
 }
 
 #romanji-text {
-    font-size: 36px; /* Reduced from 80px */
+    font-size: 2.25em; /* Equivalent to 36px if base font size is 16px */
 }
 
 #phonetic-text {
-    color: var(--text-color);
-    font-size: 18px; /* Smaller font size for phonetic text */
+    font-size: 1.125em; /* Equivalent to 18px if base font size is 16px */
 }
 
 #english-text {
-    font-size: 36px; /* Smaller font size for phonetic text */
+    font-size: 2.25em; /* Equivalent to 36px if base font size is 16px */
+}
+@media (max-width: 768px) {
+    #romanji-text {
+        font-size: 2.25em; /* Equivalent to 36px if base font size is 16px */
+    }
+
+    #phonetic-text {
+        font-size: 1.125em; /* Equivalent to 18px if base font size is 16px */
+    }
+
+    #english-text {
+        font-size: 2.25em; /* Equivalent to 36px if base font size is 16px */
+    }
+}
+
+@media (max-width: 480px) {
+    #romanji-text {
+        font-size: 1.75em; /* Equivalent to 28px if base font size is 16px */
+    }
+
+    #phonetic-text {
+        font-size: 0.875em; /* Equivalent to 14px if base font size is 16px */
+    }
+
+    #english-text {
+        font-size: 1.75em; /* Equivalent to 28px if base font size is 16px */
+    }
 }
 
 #intro-container {
