@@ -5,8 +5,8 @@
     <title>JPN Tourist Flashcards</title>
     <meta name="theme-color" content="#E57373">
     <link rel="apple-touch-icon" sizes="128x128" href="icon.png">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="landing.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/landing.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,21 +16,30 @@
         rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
+    <script src="../javascript/script.js"></script>
 </head>
+<script type="module">
+    import { isLoggedIn } from '../javascript/auth.js';
+
+    $(document).ready(function() {
+        if (!isLoggedIn()) {
+            window.location.href = '../index.html';
+        }
+    });
+</script>
 
 <body>
     <header>
         <nav>
             <div class="logo">
-                <img src="flag.png" alt="Japanese Flag" class="flag">
+                <img src="../assets/flag.png" alt="Japanese Flag" class="flag">
                 <h1><a href="index.html" style="text-decoration: none; color: inherit;">JPN Tourist Flashcards</a></h1>
             </div>
             <div class="hamburger-menu">
-                <img src="menu_icon.svg" alt="Menu Icon" class="menu-icon">
+                <img src="../assets/menu_icon.svg" alt="Menu Icon" class="menu-icon">
             </div>
             <ul class="nav-links">
-                <li><a href="#start"><button class="start-button">Get Started</button></a></li>
+                <li><a href="index.html"><button class="start-button">Get Started</button></a></li>
                 <li><a href="login.html"><button class="login-button">Login</button></a></li>
             </ul>
         </nav>

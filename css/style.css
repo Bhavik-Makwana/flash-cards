@@ -306,7 +306,8 @@ button:active, .button-flip:active, .button-next:active, .flex-deck:active {
 }
 
 .modal-content {
-    background-color:;
+    background-color: var(--card-color);
+    color: var(--text-color-dark);
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;

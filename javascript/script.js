@@ -1,4 +1,11 @@
+
+import { login } from './login.js';
 $(document).ready(function () {
+
+    
+
+    login();
+    // cards
     $(".button-flip").on("click", function() {
         let transform = $(".flex-cards").css("transform");
         console.log(transform);

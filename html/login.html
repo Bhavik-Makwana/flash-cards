@@ -5,26 +5,27 @@
     <meta name="theme-color" content="#E57373">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - JPN Tourist Flashcards</title>
-    <link rel="stylesheet" href="landing.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/landing.css">
+    <link rel="stylesheet" href="../css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="script.js" defer></script>
+    <script src="../javascript/script.js" type="module" defer></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="1072559081821-n3jicditb9cskijnptjruq7o77ma3u0g.apps.googleusercontent.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <nav>
             <div class="logo">
-                <img src="flag.png" alt="Japanese Flag" class="flag">
-                <h1><a href="index.html" style="text-decoration: none; color: inherit;">JPN Tourist Flashcards</a></h1>
+                <img src="../assets/flag.png" alt="Japanese Flag" class="flag">
+                <h1><a href="../index.html" style="text-decoration: none; color: inherit;">JPN Tourist Flashcards</a></h1>
             </div>
             <div class="hamburger-menu">
-                <img src="menu_icon.svg" alt="Menu Icon" class="menu-icon">
+                <img src="../assets/menu_icon.svg" alt="Menu Icon" class="menu-icon">
             </div>
             <ul class="nav-links">
                 <li><a href="#start"><button class="start-button">Get Started</button></a></li>
                 <li><a href="login.html"><button class="login-button">Login</button></a></li>
-                <!-- <li><a href="#signup">Sign Up</a></li> -->
             </ul>
             
                 
@@ -36,9 +37,9 @@
         <div class="login-container">
             <h2>Login</h2>
             <form class="login-form">
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Password" required>
-                <button type="submit">Log In</button>
+                <input type="email" placeholder="Email" required id="email">
+                <input type="password" placeholder="Password" required id="password">
+                <button type="submit" class="login-button-submit">Log In</button>
             </form>
             <p>Don't have an account? <a href="#">Sign up</a></p>
         </div>
@@ -54,10 +55,8 @@
         <div class="or-divider">
             <span>or</span>
         </div>
-        <button class="google-signin">
-            <img src="google-icon.png" alt="Google Icon">
-            Sign up with Google
-        </button>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
         <p>Already have an account? <a href="#">Log in</a></p>
     </div>
     </main>
