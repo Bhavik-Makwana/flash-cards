@@ -38,6 +38,7 @@ jobs:
         
         # Debug: Verify SSH connection
         ssh -v -i private_key $USER@$HOST "echo 'SSH connection successful'"
+        echo "SSH connection successful"
         scp -i private_key backend/main $USER@$HOST:/go-web/flash-cards/backend/
         ssh -i private_key $USER@$HOST "systemctl daemon-reload"
         rm -f private_key
