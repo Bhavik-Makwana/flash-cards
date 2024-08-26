@@ -26,7 +26,16 @@ func AuthenticationMiddleware(config *config.Config, next http.HandlerFunc) http
 
 func corsMiddleware(config *config.Config, next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", config.CORSAllowedOrigin)
+		origin := r.Header.Get("Origin")
+		allowedOrigins := []string{config.CORSAllowedOrigin, "https://lobster-app-jgtjk.ondigitalocean.app"}
+		for _, allowedOrigin := range allowedOrigins {
+			if origin == allowedOrigin {
+				w.Header().Set("Access-Control-Allow-Origin", origin)
+			} else {
+				w.Header().Set("Access-Control-Allow-Origin", allowedOrigin)
+			}
+		}
+		w.Header().Set("Access-Control-Allow-Credentials", "true")
 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
 		if r.Method == "OPTIONS" {

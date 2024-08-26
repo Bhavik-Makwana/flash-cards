@@ -17,6 +17,9 @@ function login() {
                 'Content-Type': 'application/json'
             },
             data: JSON.stringify(data),
+            xhrFields: {
+                withCredentials: true
+            },
             success: function (response) {
                 console.log('Login successful:', response);
                 localStorage.setItem('token', response.token);
