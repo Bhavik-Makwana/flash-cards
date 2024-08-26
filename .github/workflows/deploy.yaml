@@ -34,16 +34,20 @@ jobs:
         echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
         
         # Stop the running service
+        echo "Stopping the running service"
         ssh -i private_key -o "IdentitiesOnly=yes" $USER@$HOST "sudo systemctl stop flash-cards.service"
         
         # Copy the binary to the server
+        echo "Copying the binary to the server"
         scp -i private_key backend/main $USER@$HOST:/go-web/flash-cards/backend
         
         # Set appropriate permissions
+        echo "Setting appropriate permissions"
         ssh -i private_key -o "IdentitiesOnly=yes" $USER@$HOST "chmod +x /go-web/flash-cards/backend/main"
         
         # Reload the service
-        ssh -i private_key $USER@$HOST "systemctl daemon-reload"
+        echo "Reloading the service"
+        ssh -i private_key -o "IdentitiesOnly=yes" $USER@$HOST "sudo systemctl daemon-reload"
 
         # Clean up
         rm -f private_key
