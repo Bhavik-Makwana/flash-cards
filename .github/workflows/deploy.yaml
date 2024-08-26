@@ -38,6 +38,7 @@ jobs:
         # Copy the new executable to a temporary location
         ssh -i private_key -o "IdentitiesOnly=yes" $USER@$HOST "mkdir -p /go-web/flash-cards/backend/tmp"
         scp -i private_key -o "IdentitiesOnly=yes" backend/main $USER@$HOST:/go-web/flash-cards/backend/tmp/main-new
+        scp -i private_key -o "IdentitiesOnly=yes" backend/config.yaml $USER@$HOST:/go-web/flash-cards/backend/config.yaml
         
         # Perform the swap
         ssh -i private_key -o "IdentitiesOnly=yes" $USER@$HOST "
