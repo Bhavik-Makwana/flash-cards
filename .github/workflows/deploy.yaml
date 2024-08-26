@@ -28,34 +28,29 @@ jobs:
         PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
         HOST: ${{ secrets.SERVER_HOST }}
         USER: ${{ secrets.SERVER_USER }}
+        SUDO_PASSWORD: ${{ secrets.SERVER_SUDO_PASSWORD }}
       run: |
         echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
 
         mkdir -p ~/.ssh
         echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
         
-        # Set up sudoers file for the deployment user
-        ssh -i private_key -o "IdentitiesOnly=yes" $USER@$HOST "
-          echo '$USER ALL=(ALL) NOPASSWD: /usr/sbin/service goweb stop, /usr/sbin/service goweb start, /bin/systemctl daemon-reload' | sudo EDITOR='tee -a' visudo
-        "
         # Copy the new executable to a temporary location
         ssh -i private_key -o "IdentitiesOnly=yes" $USER@$HOST "mkdir -p /go-web/flash-cards/backend/tmp"
         scp -i private_key -o "IdentitiesOnly=yes" backend/main $USER@$HOST:/go-web/flash-cards/backend/tmp/main-new
         
         # Perform the swap
         ssh -i private_key -o "IdentitiesOnly=yes" $USER@$HOST "
-          sudo service goweb stop
+          echo '$SUDO_PASSWORD' | sudo -S service goweb stop
           mv /go-web/flash-cards/backend/main /go-web/flash-cards/backend/main-old
           mv /go-web/flash-cards/backend/tmp/main-new /go-web/flash-cards/backend/main
           chmod +x /go-web/flash-cards/backend/main
-          sudo service goweb start
+          echo '$SUDO_PASSWORD' | sudo -S systemctl daemon-reload
+          echo '$SUDO_PASSWORD' | sudo -S service goweb start
         "
 
         # Clean up
-        ssh -i private_key -o "IdentitiesOnly=yes" $USER@$HOST "
-          rm -f /go-web/flash-cards/backend/main-old
-          sudo sed -i '/^$USER ALL=(ALL) NOPASSWD:/d' /etc/sudoers
-        "
+        ssh -i private_key -o "IdentitiesOnly=yes" $USER@$HOST "rm -f /go-web/flash-cards/backend/main-old"
         rm -f private_key
 
     
