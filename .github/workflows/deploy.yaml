@@ -45,7 +45,6 @@ jobs:
           mv /go-web/flash-cards/backend/main /go-web/flash-cards/backend/main-old
           mv /go-web/flash-cards/backend/tmp/main-new /go-web/flash-cards/backend/main
           chmod +x /go-web/flash-cards/backend/main
-          echo '$SUDO_PASSWORD' | sudo -S systemctl daemon-reload
           echo '$SUDO_PASSWORD' | sudo -S service goweb start
         "
 
