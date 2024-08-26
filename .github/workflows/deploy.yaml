@@ -30,6 +30,8 @@ jobs:
         USER: ${{ secrets.SERVER_USER }}
       run: |
         echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+        mkdir -p ~/.ssh
+        echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
         scp -i private_key backend/main $USER@$HOST:/go-web/flash-cards/backend/
         ssh -i private_key $USER@$HOST "systemctl daemon-reload"
         rm -f private_key
