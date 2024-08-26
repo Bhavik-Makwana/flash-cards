@@ -11,7 +11,7 @@ function login() {
         };
         console.log(data);
         $.ajax({
-            url: 'http://localhost:8080/login',
+            url: 'http://138.68.136.155/login',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
