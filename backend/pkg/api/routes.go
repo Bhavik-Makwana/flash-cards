@@ -23,6 +23,7 @@ func SetupRoutes(h *models.Handler, cfg config.Config) *mux.Router {
 	r.Handle("/progress", chain(AuthenticationMiddleware(&cfg, gh.ViewProgress)))
 	r.HandleFunc("/login", chain(ah.Login))
 	r.HandleFunc("/signup", chain(ah.Signup))
+	r.HandleFunc("/health_check", chain(gh.HealthCheck))
 
 	return r
 }

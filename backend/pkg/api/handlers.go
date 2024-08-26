@@ -18,6 +18,11 @@ func (h *GenericHandler) HelloHandler(w http.ResponseWriter, r *http.Request) {
 	log.Println("Hello, World!")
 }
 
+func (h *GenericHandler) HealthCheck(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "OK")
+	log.Println("OK")
+}
+
 func (h *GenericHandler) GetAllWords(w http.ResponseWriter, r *http.Request) {
 	db, err := sql.Open("sqlite3", "./flashcards.db")
 	if err != nil {
