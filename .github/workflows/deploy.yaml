@@ -35,7 +35,7 @@ jobs:
         
         # Stop the running service
         echo "Stopping the running service"
-        ssh -i private_key -o "IdentitiesOnly=yes" $USER@$HOST "sudo systemctl stop flash-cards.service"
+        ssh -i private_key $USER@$HOST "sudo systemctl stop flash-cards.service"
         
         # Copy the binary to the server
         echo "Copying the binary to the server"
@@ -43,11 +43,11 @@ jobs:
         
         # Set appropriate permissions
         echo "Setting appropriate permissions"
-        ssh -i private_key -o "IdentitiesOnly=yes" $USER@$HOST "chmod +x /go-web/flash-cards/backend/main"
+        ssh -i private_key $USER@$HOST "chmod +x /go-web/flash-cards/backend/main"
         
         # Reload the service
         echo "Reloading the service"
-        ssh -i private_key -o "IdentitiesOnly=yes" $USER@$HOST "sudo systemctl daemon-reload"
+        ssh -i private_key $USER@$HOST "sudo systemctl daemon-reload"
 
         # Clean up
         rm -f private_key
