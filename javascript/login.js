@@ -11,7 +11,7 @@ function login() {
         };
         console.log(data);
         $.ajax({
-            url: 'http://jpn-tourist-flashcards.com/login',
+            url: 'https://jpn-tourist-flashcards.com/login',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
