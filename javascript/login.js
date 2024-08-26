@@ -11,7 +11,7 @@ function login() {
         };
         console.log(data);
         $.ajax({
-            url: 'http://138.68.136.155/login',
+            url: 'http://jpn-tourist-flashcards.com/login',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
