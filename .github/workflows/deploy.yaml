@@ -32,6 +32,12 @@ jobs:
         echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
         mkdir -p ~/.ssh
         echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+        # Debug: Check the content of the private key (redacted)
+        echo "Private key file contents (first line):"
+        head -n 1 private_key
+        
+        # Debug: Verify SSH connection
+        ssh -v -i private_key $USER@$HOST "echo 'SSH connection successful'"
         scp -i private_key backend/main $USER@$HOST:/go-web/flash-cards/backend/
         ssh -i private_key $USER@$HOST "systemctl daemon-reload"
         rm -f private_key
