@@ -1,42 +1,33 @@
 package config
 
 import (
-	"io/ioutil"
-	"log"
+	"os"
 
 	"gopkg.in/yaml.v2"
 )
 
 // Config holds the application configuration
 type Config struct {
-	JWTSecretKey string `yaml:"JWT_SECRET_KEY"`
+	JWTSecretKey      string `yaml:"JWT_SECRET_KEY"`
+	CORSAllowedOrigin string `yaml:"CORS_ALLOWED_ORIGIN"`
+	DBHost            string `yaml:"DB_HOST"`
+	DBPort            string `yaml:"DB_PORT"`
+	DBName            string `yaml:"DB_NAME"`
+	DBUser            string `yaml:"DB_USER"`
+	DBPassword        string `yaml:"DB_PASSWORD"`
+	ServerPort        string `yaml:"SERVER_PORT"`
+	LogLevel          string `yaml:"LOG_LEVEL"`
+	Port              string `yaml:"PORT"`
 }
 
-// SecretKey holds the JWT secret key
-var SecretKey []byte
-
-// InitSecretKey initializes the JWT secret key
-func InitSecretKey() {
-	config, err := loadConfig("config.yaml")
-	if err != nil {
-		log.Fatalf("Failed to load config: %v", err)
-	}
-
-	if config.JWTSecretKey == "" {
-		log.Fatal("JWT_SECRET_KEY is not set in config.yaml")
-	}
-
-	SecretKey = []byte(config.JWTSecretKey)
-}
-
-// loadConfig reads the config file and returns a Config struct
-func loadConfig(filename string) (*Config, error) {
-	data, err := ioutil.ReadFile(filename)
+// LoadConfig reads the config file and returns a Config struct
+func LoadConfig(filename string) (*map[string]Config, error) {
+	data, err := os.ReadFile(filename)
 	if err != nil {
 		return nil, err
 	}
 
-	var config Config
+	var config map[string]Config
 	err = yaml.Unmarshal(data, &config)
 	if err != nil {
 		return nil, err

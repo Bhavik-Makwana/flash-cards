@@ -18,9 +18,10 @@ import (
 
 type AuthHandler struct {
 	models.Handler
+	Config *config.Config
 }
 
-func GetUserFromToken(r *http.Request) (models.User, error) {
+func (h *AuthHandler) GetUserFromToken(r *http.Request) (models.User, error) {
 	authHeader := r.Header.Get("Authorization")
 	if authHeader == "" {
 		return models.User{}, fmt.Errorf("unauthorized")
@@ -35,7 +36,7 @@ func GetUserFromToken(r *http.Request) (models.User, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, jwt.ErrSignatureInvalid
 		}
-		return config.SecretKey, nil
+		return h.Config.JWTSecretKey, nil
 	})
 
 	if err != nil {
@@ -96,7 +97,7 @@ func (h *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	if err := bcrypt.CompareHashAndPassword(storedPassword, []byte(credentials.Password)); err == nil {
 		// Authentication successful
-		token := generateToken(credentials.Username)
+		token := h.generateToken(credentials.Username)
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(map[string]string{"token": token})
 	} else {
@@ -151,7 +152,7 @@ func (h *AuthHandler) Signup(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(map[string]string{"message": "User created successfully"})
 }
 
-func generateToken(username string) string {
+func (h *AuthHandler) generateToken(username string) string {
 	// Generate JWT token
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"username": username,
@@ -159,7 +160,7 @@ func generateToken(username string) string {
 	})
 
 	// Sign the token with a secret key
-	secretKey := config.SecretKey
+	secretKey := h.Config.JWTSecretKey
 	tokenString, err := token.SignedString(secretKey)
 	if err != nil {
 		log.Printf("Error generating token: %v", err)

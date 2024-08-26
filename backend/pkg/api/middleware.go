@@ -3,13 +3,15 @@ package api
 import (
 	"context"
 	"flashcards/pkg/auth"
+	"flashcards/pkg/config"
 	"log"
 	"net/http"
 )
 
-func AuthenticationMiddleware(next http.HandlerFunc) http.HandlerFunc {
+func AuthenticationMiddleware(config *config.Config, next http.HandlerFunc) http.HandlerFunc {
+	ah := &auth.AuthHandler{Config: config}
 	return func(w http.ResponseWriter, r *http.Request) {
-		user, err := auth.GetUserFromToken(r)
+		user, err := ah.GetUserFromToken(r)
 		if err != nil {
 			http.Error(w, "Unauthorized", http.StatusUnauthorized)
 			return
@@ -22,9 +24,9 @@ func AuthenticationMiddleware(next http.HandlerFunc) http.HandlerFunc {
 	}
 }
 
-func corsMiddleware(next http.HandlerFunc) http.HandlerFunc {
+func corsMiddleware(config *config.Config, next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Origin", config.CORSAllowedOrigin)
 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
 		if r.Method == "OPTIONS" {
