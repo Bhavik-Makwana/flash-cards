@@ -30,7 +30,11 @@ function login() {
                 window.location.href = 'cards.html';
             },
             error: function (xhr, status, error) {
-                console.error('Login failed:', error);
+                if (xhr.status === 0) {
+                    console.error("CORS error: The request was blocked by the CORS policy");
+                } else {
+                    console.error('Login failed:', error);
+                }
                 // Handle login error here
                 // For example, show an error message to the user
             }
