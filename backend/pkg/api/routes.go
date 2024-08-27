@@ -10,7 +10,7 @@ import (
 )
 
 func SetupRoutes(h *models.Handler, cfg config.Config) *mux.Router {
-	ah := &auth.AuthHandler{Handler: *h}
+	ah := &auth.AuthHandler{Handler: *h, Config: &cfg}
 	gh := &GenericHandler{Handler: *h}
 	r := mux.NewRouter()
 
