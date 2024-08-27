@@ -26,22 +26,23 @@ func AuthenticationMiddleware(config *config.Config, next http.HandlerFunc) http
 
 func corsMiddleware(config *config.Config, next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		if config.CORSAllowedOrigin == "*" {
-			w.Header().Set("Access-Control-Allow-Origin", "*")
-		} else {
-			origin := r.Header.Get("Origin")
-			allowedOrigins := []string{"https://lobster-app-jgtjk.ondigitalocean.app", "https://jpn-tourist-flashcards.com"}
-			for _, allowedOrigin := range allowedOrigins {
-				if origin == allowedOrigin {
-					w.Header().Set("Access-Control-Allow-Origin", origin)
-				}
-			}
-		}
+		// if config.CORSAllowedOrigin == "*" {
+		// 	w.Header().Set("Access-Control-Allow-Origin", "*")
+		// } else {
+		// 	origin := r.Header.Get("Origin")
+		// 	allowedOrigins := []string{"https://lobster-app-jgtjk.ondigitalocean.app", "https://jpn-tourist-flashcards.com"}
+		// 	for _, allowedOrigin := range allowedOrigins {
+		// 		if origin == allowedOrigin {
+		// 			w.Header().Set("Access-Control-Allow-Origin", origin)
+		// 		}
+		// 	}
+		// }
 		w.Header().Set("Access-Control-Allow-Origin", "https://jpn-tourist-flashcards.com")
-		// w.Header().Set("Access-Control-Allow-Credentials", "true")
+		w.Header().Set("Access-Control-Allow-Credentials", "true")
 
 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+		log.Default().Println("Header set", w.Header())
 		if r.Method == "OPTIONS" {
 			w.WriteHeader(http.StatusOK)
 			return
