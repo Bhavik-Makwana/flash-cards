@@ -37,7 +37,9 @@ func corsMiddleware(config *config.Config, next http.HandlerFunc) http.HandlerFu
 				}
 			}
 		}
-		w.Header().Set("Access-Control-Allow-Credentials", "true")
+		w.Header().Set("Access-Control-Allow-Origin", "https://jpn-tourist-flashcards.com")
+		// w.Header().Set("Access-Control-Allow-Credentials", "true")
+
 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
 		if r.Method == "OPTIONS" {
