@@ -1,7 +1,6 @@
 # Local configuration
 local:
   JWT_SECRET_KEY: "local_secret_key_here"
-  PORT: "8080"
   CORS_ALLOWED_ORIGIN: "*"
   DB_HOST: "localhost"
   DB_PORT: "5432"
@@ -14,8 +13,7 @@ local:
 # Production configuration
 production:
   JWT_SECRET_KEY: "prod_secret_key_here"
-  PORT: "8080"
-  CORS_ALLOWED_ORIGIN: "https://lobster-app-jgtjk.ondigitalocean.app"
+  CORS_ALLOWED_ORIGIN: "https://jpn-tourist-flashcards.com"
   DB_HOST: "${DB_HOST}"
   DB_PORT: "${DB_PORT}"
   DB_NAME: "${DB_NAME}"

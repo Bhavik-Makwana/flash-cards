@@ -17,7 +17,6 @@ type Config struct {
 	DBPassword        string `yaml:"DB_PASSWORD"`
 	ServerPort        string `yaml:"SERVER_PORT"`
 	LogLevel          string `yaml:"LOG_LEVEL"`
-	Port              string `yaml:"PORT"`
 }
 
 // LoadConfig reads the config file and returns a Config struct
