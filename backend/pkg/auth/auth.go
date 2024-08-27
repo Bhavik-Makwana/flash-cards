@@ -36,7 +36,7 @@ func (h *AuthHandler) GetUserFromToken(r *http.Request) (models.User, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, jwt.ErrSignatureInvalid
 		}
-		return h.Config.JWTSecretKey, nil
+		return []byte(h.Config.JWTSecretKey), nil
 	})
 
 	if err != nil {
