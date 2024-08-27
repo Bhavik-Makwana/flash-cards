@@ -26,6 +26,7 @@ func AuthenticationMiddleware(config *config.Config, next http.HandlerFunc) http
 
 func corsMiddleware(config *config.Config, next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		log.Default().Println("Origin", r.Header.Get("Origin"))
 		if config.CORSAllowedOrigin == "*" {
 			w.Header().Set("Access-Control-Allow-Origin", "*")
 		} else {

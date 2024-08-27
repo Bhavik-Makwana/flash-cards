@@ -21,6 +21,11 @@ type AuthHandler struct {
 	Config *config.Config
 }
 
+func (h *AuthHandler) IsUserLoggedIn(r *http.Request) bool {
+	_, err := h.GetUserFromToken(r)
+	return err == nil
+}
+
 func (h *AuthHandler) GetUserFromToken(r *http.Request) (models.User, error) {
 	authHeader := r.Header.Get("Authorization")
 	if authHeader == "" {
