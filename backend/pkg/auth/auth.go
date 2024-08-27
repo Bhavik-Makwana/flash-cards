@@ -160,7 +160,7 @@ func (h *AuthHandler) generateToken(username string) string {
 	})
 
 	// Sign the token with a secret key
-	secretKey := h.Config.JWTSecretKey
+	secretKey := []byte(h.Config.JWTSecretKey)
 	tokenString, err := token.SignedString(secretKey)
 	if err != nil {
 		log.Printf("Error generating token: %v", err)
