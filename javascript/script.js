@@ -16,7 +16,7 @@ $(document).ready(function () {
             $(".flex-cards").css("transform", "rotateY(180deg)");
         }
     })
-    // Array to store flashcard data: [Japanese, English, Romaji]
+    // Array to store flashcard data: [Japanese, English, Romanji]
     const flashcards = [
         ["こんにちは", "Hello", "Konnichiwa"],
         ["ありがとう", "Thank you", "Arigatou"],
@@ -94,11 +94,11 @@ $(document).ready(function () {
     }
 
     function updateFlashcard() {
-        const [japanese, english, romaji] = getNextFlashcard();
-        console.log(romaji);
+        const [japanese, english, romanji] = getNextFlashcard();
+        console.log(romanji);
         $("#japanese-text").text(japanese);
-        $("#romanji-text").text(romaji);
-        $('#phonetic-text').text(romaji);
+        $("#romanji-text").text(romanji);
+        $('#phonetic-text').text(romanji);
         $("#english-text").text(english);
     }
 
@@ -106,7 +106,8 @@ $(document).ready(function () {
     updateFlashcard();
 
     // Update flashcard when the "Next" button is clicked
-    $(".button-next").on("click", updateFlashcard);
+    $(".button-correct").on("click", updateFlashcard);
+    $(".button-incorrect").on("click", updateFlashcard);
     
     
     // Add touch event listeners for swipe detection using jQuery

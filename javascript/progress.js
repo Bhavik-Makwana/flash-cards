@@ -10,12 +10,95 @@ function updatePieChart(data) {
 
 // This script will be replaced with actual data fetching and processing
 // For now, it's just a placeholder to show how the progress bars might work
-function updateProgress(category, progress, mastered) {
+function updateProgress(category, progress, mastered, seen, total) {
     $(`#${category}-progress`).css('width', `${progress}%`);
     $(`#${category}-mastered`).text(mastered);
+    $(`#${category}-seen`).text(seen);
+    $(`#${category}-total`).text(total);
     updateProgressBar(category);
 }
 
+// Function to fetch progress data from the server
+function fetchProgressData(category) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: 'http://localhost:8080/api/v1/progress',
+            method: 'GET',
+            data: { category: category },
+            success: function (response) {
+                resolve(response);
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching progress data:', error);
+                reject(error);
+            }
+        });
+    });
+}
+
+// Function to fetch words for a specific category
+function fetchWordsByCategory(category) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: 'http://localhost:8080/api/v1/words/category',
+            method: 'GET',
+            data: { category: category },
+            success: function (response) {
+                resolve(response);
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching words for category:', category, error);
+                reject(error);
+            }
+        });
+    });
+}
+
+// Function to process the received progress data
+async function processProgressData(data) {
+    if (data && data.progress) {
+        try {
+            const totalWords = await fetchWordsByCategory(data.category);
+            let seenWords = 0;
+            let masteredWords = 0;
+            let masteredWordsList = [];
+            let seenWordsList = [];
+
+            data.progress.forEach(word => {
+                if (word.seen_count > 0) {
+                    seenWords++;
+                    seenWordsList.push(`${word.english} | ${word.japanese} | ${word.romanji}`);
+                }
+                if (word.correct_count / word.seen_count >= 0.8) {
+                    masteredWords++;
+                    masteredWordsList.push(`<b>${word.english} | ${word.japanese} | ${word.romanji}</b>`);
+                }
+            });
+
+            const progressPercentage = (masteredWords / totalWords.length) * 100;
+
+            // Populate word list
+            populateWordList(data.category.toLowerCase(), masteredWordsList.concat(seenWordsList));
+            updateProgress(data.category.toLowerCase(), progressPercentage, masteredWords, seenWords, totalWords.length);
+            return {
+                category: data.category.toLowerCase(),
+                progress: progressPercentage,
+                masteredWords: masteredWords,
+                seenWords: seenWords,
+                totalWords: totalWords.length
+            };
+        } catch (error) {
+            console.error('Error processing progress data:', error);
+            return null;
+        }
+    }
+    return null;
+}
+
+// Call fetchProgressData for each category when the page loads
+$(document).ready(function () {
+
+});
 
 
 // Function to update progress bar and change color if 100%
@@ -66,85 +149,93 @@ function populateWordList(category, words) {
     });
 }
 
+// Function to calculate and update total words practiced
+function updateTotalWordsPracticed(processedData) {
+    let totalWordsPracticed = 0;
+    let totalCorrectAnswers = 0;
+
+    processedData.forEach(data => {
+        if (data) {
+            totalWordsPracticed += data.seenWords;
+            totalCorrectAnswers += data.masteredWords;
+        }
+    });
+
+    console.log(`Total words practiced: ${totalWordsPracticed}`);
+    $('#total-words-practiced').text(totalWordsPracticed);
+
+    // Update accuracy rate
+    const accuracyRate = totalWordsPracticed > 0 ? ((totalCorrectAnswers / totalWordsPracticed) * 100).toFixed(2) : 0;
+    $('#accuracy-rate').text(`${accuracyRate}%`);
+    $('#total-correct-answers').text(totalCorrectAnswers);
+}
 
 
+// Function to update the words mastered count for a specific category
+function updateWordsMasteredCount(wordsMasteredByCategory, categoryIndex, masteredCount) {
+    wordsMasteredByCategory[categoryIndex] = masteredCount;
+}
 
 $(document).ready(function () {
     window.toggleWordList = toggleWordList;
     // Example usage (replace with actual data fetching):
-    const essentialsWords = ['こんにちは', 'ありがとう', 'すみません', 'はい', 'いいえ'];
-    const emergencyWords = ['こんにちは', 'ありがとう', 'すみません', 'はい', 'いいえ'];
-    const shoppingWords = ['こんにちは', 'ありがとう', 'すみません', 'はい', 'いいえ'];
-    const timeWords = ['こんにちは', 'ありがとう', 'すみません', 'はい', 'いいえ'];
-    const diningWords = ['こんにちは', 'ありがとう', 'すみません', 'はい', 'いいえ'];
-    const travelWords = ['こんにちは', 'ありがとう', 'すみません', 'はい', 'いいえ'];
-    const hotelWords = ['こんにちは', 'ありがとう', 'すみません', 'はい', 'いいえ'];
-    const cultureWords = ['こんにちは', 'ありがとう', 'すみません', 'はい', 'いいえ'];
-    const photographyWords = ['こんにちは', 'ありがとう', 'すみません', 'はい', 'いいえ'];
 
-    populateWordList('essentials', essentialsWords);
-    populateWordList('emergency', emergencyWords);
-    populateWordList('shopping', shoppingWords);
-    populateWordList('time', timeWords);
-    populateWordList('dining', diningWords);
-    populateWordList('travel', travelWords);
-    populateWordList('hotel', hotelWords);
-    populateWordList('culture', cultureWords);
-    populateWordList('photography', photographyWords);
 
- 
-    const ctx = $('#category-pie-chart')[0].getContext('2d');
-    new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ['Essentials', 'Emergency', 'Shopping', 'Time', 'Dining', 'Travel', 'Hotel', 'Culture', 'Photography'],
-            datasets: [{
-                data: [1, 2, 3, 0, 0, 0, 0, 0, 0], // Initialize with zeros, update dynamically
-                backgroundColor: [
-                    '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF',
-                    '#FF9F40', '#FF6384', '#C9CBCF', '#7CFC00'
-                ]
-            }]
-        },
-        options: {
-            plugins: {
-                legend: {
-                    position: 'bottom',
+    const categories = ['Essentials', 'Emergency', 'Shopping', 'Time', 'Dining', 'Travel', 'Hotel', 'Culture', 'Photography'];
+
+    let wordsMasteredByCategory = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let fetchPromises = categories.map(category =>
+        fetchProgressData(category)
+            .then(data => processProgressData(data))
+    );
+
+    Promise.all(fetchPromises)
+        .then((processedData) => {
+            console.log("All category data fetched and processed");
+            updateTotalWordsPracticed(processedData);
+            processedData.forEach((data, index) => {
+                if (data && data.masteredWords !== undefined) {
+                    updateWordsMasteredCount(wordsMasteredByCategory, index, data.masteredWords);
+                }
+            });
+            const ctx = $('#category-pie-chart')[0].getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Essentials', 'Emergency', 'Shopping', 'Time', 'Dining', 'Travel', 'Hotel', 'Culture', 'Photography'],
+                    datasets: [{
+                        data: wordsMasteredByCategory, // Initialize with zeros, update dynamically
+                        backgroundColor: [
+                            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF',
+                            '#FF9F40', '#FF6384', '#C9CBCF', '#7CFC00'
+                        ]
+                    }]
                 },
-                title: {
-                    display: true,
-                    text: 'Words Mastered by Category'
-                },
-            },
-            responsive: true,
-            legend: {
-                display: false,
-                position: 'top',
-                align: 'left'
-            }
-        }
-    });
+                options: {
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Words Mastered by Category'
+                        },
+                    },
+                    responsive: true,
+                    legend: {
+                        display: false,
+                        position: 'top',
+                        align: 'left'
+                    }
+                }
+            });
+        })
+        .catch(error => {
+            console.error("Error fetching category data:", error);
+        });
 
-    // Example usage:
-    updateProgress('essentials', 75, 15);
-    updateProgress('emergency', 50, 10);
-    updateProgress('travel', 100, 100);
-    updateProgress('time', 90, 100);
-    updateProgress('dining', 0, 0);
-    updateProgress('shopping', 0, 0);
-    updateProgress('hotel', 10, 0);
-    updateProgress('culture', 0, 0);
-    updateProgress('photography', 0, 0);
 
-    // Set up listeners for progress updates
-    updateProgressBar('travel');
 
-    updateProgress('travel', 100, 100);
-    // Example usage:
-    // $(document).trigger('progressUpdate', { category: 'essentials', progress: 100 });
-    // Update overall stats
-    $('#total-words-practiced').text('500');
-    $('#total-correct-answers').text('400');
-    $('#accuracy-rate').text('80%');
+
 
 });
