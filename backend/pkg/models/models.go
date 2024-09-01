@@ -9,7 +9,7 @@ import (
 type Word struct {
 	ID       int    `json:"id"`
 	Japanese string `json:"japanese"`
-	Romaji   string `json:"romaji"`
+	Romanji  string `json:"romanji"`
 	English  string `json:"english"`
 	Category string `json:"category"`
 }
@@ -25,10 +25,11 @@ type User struct {
 }
 
 type Progress struct {
-	ID          int    `json:"id"`
-	Username    string `json:"username"`
-	Category    string `json:"category"`
-	LastUpdated string `json:"last_updated"`
+	ID             int    `json:"id"`
+	Username       string `json:"username"`
+	LastUpdated    string `json:"last_updated"`
+	WordId         int    `json:"word_id"`
+	WordProgressId int    `json:"word_progress_id"`
 }
 
 type WordProgress struct {

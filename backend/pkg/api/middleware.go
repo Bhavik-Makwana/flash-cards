@@ -4,6 +4,7 @@ import (
 	"context"
 	"flashcards/pkg/auth"
 	"flashcards/pkg/config"
+	"flashcards/pkg/models"
 	"log"
 	"net/http"
 )
@@ -20,6 +21,20 @@ func AuthenticationMiddleware(config *config.Config, next http.HandlerFunc) http
 		log.Println("user", user)
 		// ctx = context.WithValue(ctx, "token", token)
 
+		next.ServeHTTP(w, r.WithContext(ctx))
+	}
+}
+func MockAuthenticationMiddleware(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		// Create a mock user
+		mockUser := models.User{
+			Username: "test@aol.com",
+		}
+
+		// Add the mock user to the context
+		ctx := context.WithValue(r.Context(), "user", mockUser)
+
+		// Call the next handler with the modified request
 		next.ServeHTTP(w, r.WithContext(ctx))
 	}
 }

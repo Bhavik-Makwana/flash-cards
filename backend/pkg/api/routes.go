@@ -17,13 +17,16 @@ func SetupRoutes(h *models.Handler, cfg config.Config) *mux.Router {
 	chain := func(h http.HandlerFunc) http.HandlerFunc {
 		return corsMiddleware(&cfg, LogMiddleware(h))
 	}
+
 	// Apply CORS middleware to each route
-	r.HandleFunc("/", chain(gh.HelloHandler))
-	r.HandleFunc("/words", chain(gh.GetAllWords))
-	r.Handle("/progress", chain(AuthenticationMiddleware(&cfg, gh.ViewProgress)))
-	r.HandleFunc("/login", chain(ah.Login))
-	r.HandleFunc("/signup", chain(ah.Signup))
-	r.HandleFunc("/health_check", chain(gh.HealthCheck))
+	v1 := r.PathPrefix("/api/v1").Subrouter()
+	v1.HandleFunc("/", chain(gh.HelloHandler))
+	v1.HandleFunc("/words", chain(gh.GetAllWords))
+	v1.Handle("/progress", chain(MockAuthenticationMiddleware(gh.ViewProgress)))
+	v1.HandleFunc("/login", chain(ah.Login))
+	v1.HandleFunc("/signup", chain(ah.Signup))
+	v1.HandleFunc("/health_check", chain(gh.HealthCheck))
+	v1.HandleFunc("/words/category", chain(gh.GetWordsCategory))
 
 	return r
 }
