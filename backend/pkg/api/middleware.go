@@ -46,12 +46,13 @@ func corsMiddleware(config *config.Config, next http.HandlerFunc) http.HandlerFu
 			w.Header().Set("Access-Control-Allow-Origin", "*")
 		} else {
 			origin := r.Header.Get("Origin")
-			allowedOrigins := []string{"https://lobster-app-jgtjk.ondigitalocean.app", "https://jpn-tourist-flashcards.com"}
-			for _, allowedOrigin := range allowedOrigins {
-				if origin == allowedOrigin {
-					w.Header().Set("Access-Control-Allow-Origin", origin)
-				}
-			}
+			// allowedOrigins := []string{"https://lobster-app-jgtjk.ondigitalocean.app", "https://jpn-tourist-flashcards.com"}
+			// for _, allowedOrigin := range allowedOrigins {
+			// if origin == allowedOrigin {
+			// w.Header().Set("Access-Control-Allow-Origin", origin)
+			// }
+			// }
+			w.Header().Set("Access-Control-Allow-Origin", origin)
 		}
 		w.Header().Set("Access-Control-Allow-Credentials", "true")
 
