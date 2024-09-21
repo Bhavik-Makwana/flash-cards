@@ -1,3 +1,5 @@
+const API = "https://api.jpn-tourist-flashcards.com/api/v1";
+const LOCAL_API = "http://localhost:8080/api/v1";
 
 // Function to update the pie chart (call this when you have the data)
 function updatePieChart(data) {
@@ -22,7 +24,7 @@ function updateProgress(category, progress, mastered, seen, total) {
 function fetchProgressData(category) {
     return new Promise((resolve, reject) => {
         $.ajax({
-            url: 'https://api.jpn-tourist-flashcards.com/api/v1/progress',
+            url: `${API}/progress`,
             method: 'GET',
             data: { category: category },
             success: function (response) {
@@ -40,7 +42,7 @@ function fetchProgressData(category) {
 function fetchWordsByCategory(category) {
     return new Promise((resolve, reject) => {
         $.ajax({
-            url: 'https://api.jpn-tourist-flashcards.com/api/v1/words/category',
+            url: `${API}/words/category`,
             method: 'GET',
             data: { category: category },
             success: function (response) {

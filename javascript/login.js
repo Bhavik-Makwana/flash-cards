@@ -1,3 +1,5 @@
+const API = "https://api.jpn-tourist-flashcards.com/api/v1";
+const LOCAL_API = "http://localhost:8080/api/v1";
 // login
 function login() {
     $(".login-button-submit").on("click", function () {
@@ -11,7 +13,7 @@ function login() {
         };
         console.log(data);
         $.ajax({
-            url: 'https://api.jpn-tourist-flashcards.com/api/v1/login',
+            url: `${API}/login`,
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

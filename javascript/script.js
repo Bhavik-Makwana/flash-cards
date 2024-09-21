@@ -1,21 +1,9 @@
+const API = "https://api.jpn-tourist-flashcards.com/api/v1";
+const LOCAL_API = "http://localhost:8080/api/v1";
 
 import { login } from './login.js';
 $(document).ready(function () {
 
-    
-
-    login();
-    // cards
-    $(".button-flip").on("click", function() {
-        let transform = $(".flex-cards").css("transform");
-        console.log(transform);
-        // $(".flex-cards").css("transform", "rotateY(180deg)");
-        if (transform === "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)" || transform == undefined)  {
-            $(".flex-cards").css("transform", "rotateY(0deg)");
-        } else {
-            $(".flex-cards").css("transform", "rotateY(180deg)");
-        }
-    })
     // Array to store flashcard data: [Japanese, English, Romanji]
     const flashcards = [
         ["こんにちは", "Hello", "Konnichiwa"],
@@ -35,54 +23,68 @@ $(document).ready(function () {
         // Add more flashcards here
     ];
 
+    // Add these variables at the top of your script
+    let currentWordIndex = 0;
+    let wordStatuses = {};
+
+
+
+    // Function to initialize the word list
+    function initializeWordList() {
+        const $wordList = $('#word-list');
+        $.each(flashcards, function (index, card) {
+            const $li = $('<li>', {
+                text: `${card[0]} - ${card[1]} - ${card[2]}`,  // Assuming Japanese text is the first element
+                id: `word-${index}`
+            });
+            $wordList.append($li);
+
+        });
+    }
+
+    // Modify your updateFlashcard function
+    function updateFlashcard() {
+        const card = flashcards[currentWordIndex];
+        $("#japanese-text").text(card.japanese);
+        $("#romanji-text").text(card.romanji);
+        $('#phonetic-text').text(card.romanji);
+        $("#english-text").text(card.english);
+
+        // Highlight the current word in the list
+
+    }
+
+
+    // cards
+    $(".button-flip").on("click", function () {
+        let transform = $(".flex-cards").css("transform");
+        console.log(transform);
+        // $(".flex-cards").css("transform", "rotateY(180deg)");
+        if (transform === "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)" || transform == undefined) {
+            $(".flex-cards").css("transform", "rotateY(0deg)");
+        } else {
+            $(".flex-cards").css("transform", "rotateY(180deg)");
+        }
+    })
+
+
     let lastShownIndices = [];
 
     function getNextFlashcard() {
-        const now = Date.now();
-        let candidates = flashcards.map((card, index) => ({
-            card,
-            index,
-            lastShown: lastShownIndices.findIndex(item => item.index === index),
-            score: 0
-        }));
-
-        candidates.forEach(candidate => {
-            if (candidate.lastShown === -1) {
-                candidate.score = Infinity;
-            } else {
-                const daysElapsed = (now - lastShownIndices[candidate.lastShown].timestamp) / (1000 * 60 * 60 * 24);
-                candidate.score = Math.pow(2, candidate.lastShown) * daysElapsed;
-            }
-        });
-
-        candidates.sort((a, b) => b.score - a.score);
-        // const selectedCard = candidates[0];
-        // Find all candidates with the highest score
-        const highestScore = candidates[0].score;
-        const topCandidates = candidates.filter(c => c.score === highestScore);
-        
-        // Select a random candidate from the top candidates
-        const selectedCard = topCandidates[Math.floor(Math.random() * topCandidates.length)];
-        
-        lastShownIndices = lastShownIndices.filter(item => item.index !== selectedCard.index);
-        lastShownIndices.unshift({ index: selectedCard.index, timestamp: now });
-
-        if (lastShownIndices.length > flashcards.length) {
-            lastShownIndices.pop();
-        }
-        // Check if all cards have been reviewed
-        if (lastShownIndices.length === flashcards.length) {
+        console.log(currentWordIndex, flashcards.length);
+        if (currentWordIndex >= flashcards.length) {
+            currentWordIndex = 0;
             console.log("All cards have been reviewed!");
             // Make a call to the /save_progress post endpoint
             $.ajax({
                 url: '/save_progress',
                 type: 'POST',
-                data: JSON.stringify({ lastShownIndices: lastShownIndices }),
+                data: JSON.stringify({ lastReviewedIndex: flashcards.length - 1 }),
                 contentType: 'application/json',
-                success: function(response) {
+                success: function (response) {
                     console.log('Progress saved successfully');
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     console.error('Error saving progress:', error);
                 }
             });
@@ -90,7 +92,10 @@ $(document).ready(function () {
             alert("Congratulations! You've reviewed all the flashcards.");
         }
 
-        return selectedCard.card;
+        const selectedCard = flashcards[currentWordIndex];
+        // currentWordIndex++;
+
+        return selectedCard;
     }
 
     function updateFlashcard() {
@@ -100,29 +105,53 @@ $(document).ready(function () {
         $("#romanji-text").text(romanji);
         $('#phonetic-text').text(romanji);
         $("#english-text").text(english);
+        // $('#word-list li').forEach(li => li.classList.remove('current'));
+        // document.getElementById(`word-${card.id}`).classList.add('current');
     }
 
     // Initial flashcard update
     updateFlashcard();
 
-    // Update flashcard when the "Next" button is clicked
-    $(".button-correct").on("click", updateFlashcard);
-    $(".button-incorrect").on("click", updateFlashcard);
-    
-    
+    // Modify your button click handlers
+    $(".button-correct").on("click", function () {
+        // $(`#word-${currentWordIndex}`).removeClass('incorrect').addClass('correct');
+        updateWordStatus(currentWordIndex, 'correct');
+        moveToNextWord();
+    });
+
+    $(".button-incorrect").on("click", function () {
+        // $(`#word-${currentWordIndex}`).removeClass('correct').addClass('incorrect');
+        updateWordStatus(currentWordIndex, 'incorrect');
+        moveToNextWord();
+    });
+
+    function moveToNextWord() {
+        currentWordIndex = (currentWordIndex + 1) % (flashcards.length+1);
+        updateFlashcard();
+    }
+
+    function updateWordStatus(wordId, status) {
+        console.log(wordId);
+        const wordElement = document.getElementById(`word-${wordId}`);
+        wordElement.classList.remove('correct', 'incorrect');
+        wordElement.classList.add(status);
+    }
+
+
+
     // Add touch event listeners for swipe detection using jQuery
     let touchStartX = 0;
     let touchEndX = 0;
-    
-    $(document).on('touchstart', function(event) {
+
+    $(document).on('touchstart', function (event) {
         touchStartX = event.originalEvent.touches[0].screenX;
     });
-    
-    $(document).on('touchend', function(event) {
+
+    $(document).on('touchend', function (event) {
         touchEndX = event.originalEvent.changedTouches[0].screenX;
         handleSwipe();
     });
-    
+
     function handleSwipe() {
         const swipeThreshold = 100; // Minimum distance for a swipe
         if (Math.abs(touchStartX - touchEndX) > swipeThreshold) {
@@ -141,87 +170,57 @@ $(document).ready(function () {
     }
 
 
-    const modal = $("#word-list-modal");
-    const btn = $("#open-word-list");
-    const span = $(".close");
-
-    btn.click(function() {
-        modal.css("display", "block");
-        populateWordList();
-    });
-
-    span.click(function() {
-        modal.css("display", "none");
-    });
-
-    $(window).click(function(event) {
-        if (event.target == modal[0]) {
-            modal.css("display", "none");
-        }
-    });
-
-    function populateWordList() {
-        const wordList = $("#word-list");
-        wordList.empty(); // Clear existing items
-
-        // Add your word list here
-
-        flashcards.forEach(word => {
-            wordList.append(`<li>${word[0]} - ${word[1]} - ${word[2]}</li>`);
-        });
-    }
-
-
     // Hamburger menu
     const hamburger = document.querySelector('.hamburger-menu');
-        const navLinks = document.querySelector('.nav-links');
-        const closeButton = document.createElement('button');
+    const navLinks = document.querySelector('.nav-links');
+    const closeButton = document.createElement('button');
 
-        function toggleMenu() {
-            navLinks.classList.toggle('active');
-        }
+    function toggleMenu() {
+        navLinks.classList.toggle('active');
+    }
 
-        function closeMenu() {
-            navLinks.classList.remove('active');
-        }
+    function closeMenu() {
+        navLinks.classList.remove('active');
+    }
 
-        function isHamburgerMenuDisplayed() {
-            return window.getComputedStyle(hamburger).display !== 'none';
-        }
+    function isHamburgerMenuDisplayed() {
+        return window.getComputedStyle(hamburger).display !== 'none';
+    }
 
-        function toggleCloseButton() {
-            closeButton.style.display = isHamburgerMenuDisplayed() ? 'block' : 'none';
-        }
+    function toggleCloseButton() {
+        closeButton.style.display = isHamburgerMenuDisplayed() ? 'block' : 'none';
+    }
 
-        function initCloseButton() {
-            closeButton.textContent = 'X';
-            closeButton.classList.add('close-button');
-            navLinks.appendChild(closeButton);
-        }
+    function initCloseButton() {
+        closeButton.textContent = 'X';
+        closeButton.classList.add('close-button');
+        navLinks.appendChild(closeButton);
+    }
 
-        function addEventListeners() {
-            hamburger.addEventListener('click', toggleMenu);
-            
-            document.addEventListener('click', (event) => {
-                if (!hamburger.contains(event.target) && !navLinks.contains(event.target)) {
-                    closeMenu();
-                }
-            });
+    function addEventListeners() {
+        hamburger.addEventListener('click', toggleMenu);
 
-            navLinks.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', closeMenu);
-            });
+        document.addEventListener('click', (event) => {
+            if (!hamburger.contains(event.target) && !navLinks.contains(event.target)) {
+                closeMenu();
+            }
+        });
 
-            closeButton.addEventListener('click', closeMenu);
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
 
-            window.addEventListener('resize', toggleCloseButton);
-        }
+        closeButton.addEventListener('click', closeMenu);
 
-        function init() {
-            initCloseButton();
-            toggleCloseButton();
-            addEventListeners();
-        }
+        window.addEventListener('resize', toggleCloseButton);
+    }
+
+    function init() {
+        initCloseButton();
+        toggleCloseButton();
+        addEventListeners();
+    }
 
     init();
+    initializeWordList();
 });

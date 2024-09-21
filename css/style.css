@@ -317,42 +317,40 @@ button:active, .button-flip:active, .button-next:active, .flex-deck:active {
     flex: 90%;
 }
 
-
-/* Modal styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-}
-
-.modal-content {
-    background-color: var(--card-color);
-    color: var(--text-color-dark);
-    margin: 15% auto;
+.word-list-container {
+    margin-top: 20px;
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
+    background-color: var(--card-color);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
+#word-list {
+    list-style-type: none;
+    padding: 0;
+    color: var(--text-color-dark);
+}
+
+#word-list li {
+    padding: 5px 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#word-list li.current {
     font-weight: bold;
-    cursor: pointer;
+    background-color: var(--accent-color);
+    color: white;
 }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+#word-list li.correct {
+    background-color: var(--success-color);
+    color: white;
+}
+
+#word-list li.incorrect {
+    background-color: #cccccc;
+    color: var(--text-color-dark);
 }
 
