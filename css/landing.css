@@ -370,7 +370,7 @@ footer {
  transform: none;
 }
 
-.start-button {
+.start-button, .progress-button {
     background-color: #FAFBFC;
     color: var(--text-color-dark);
     border-radius: 20px;
@@ -383,7 +383,8 @@ footer {
     display: inline-block;
     vertical-align: middle;
 }
-.start-button:hover {
+
+.start-button:hover, .progress-button:hover {
     background-color: #e9e9e9;
     transform: none;
 }

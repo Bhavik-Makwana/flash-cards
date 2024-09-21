@@ -4,6 +4,43 @@ const LOCAL_API = "http://localhost:8080/api/v1";
 import { login } from './login.js';
 $(document).ready(function () {
 
+    // Function to check if user is logged in
+    function isUserLoggedIn() {
+        return localStorage.getItem('token') !== null;
+    }
+
+    // Function to generate nav bar components
+    function generateNavBar() {
+        const $navLinks = $('.nav-links');
+        $navLinks.empty(); // Clear existing links
+
+        if (!isUserLoggedIn()) {
+            // User is not logged in, add appropriate buttons
+            $navLinks.append(`
+                <li><a href="#start"><button class="start-button">Get Started</button></a></li>
+                <li><a href="login.html"><button class="login-button">Login</button></a></li>
+                <li><a href="progress.html"><button class="progress-button">Progress</button></a></li>
+            `);
+        } else {
+            // User is logged in, you can add different buttons here if needed
+            // For example:
+            $navLinks.append(`
+                <li><a href="cards.html"><button class="start-button">Flashcards</button></a></li>
+                <li><a href="progress.html"><button class="progress-button">Progress</button></a></li>
+                <li><a href="profile.html"><button class="login-button">Profile</button></a></li>
+            `);
+        }
+    }
+
+    // Call the function to generate nav bar
+    generateNavBar();
+
+    
+    // Add click event listener to flip-container
+    $('.flip-container').on('click', function() {
+        $(this).toggleClass('flipped');
+    });
+
     // Array to store flashcard data: [Japanese, English, Romanji]
     const flashcards = [
         ["こんにちは", "Hello", "Konnichiwa"],

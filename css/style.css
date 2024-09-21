@@ -10,11 +10,6 @@ body {
     font-family: 'Montserrat', cursive;
 }
 
-@media (hover: hover) {
-    .flip-container:hover .flex-cards {
-        transform: rotateY(180deg);
-    }
-}
 
 :root {
     --primary-color: #e15353; /* Softer coral for a more subtle energy */
@@ -28,7 +23,7 @@ body {
     --success-color: #81C784; /* Softer green for positive feedback */
     --error-color: #E57373; /* Muted red for alerts or errors */
     --button-color: #ae3f3f; /* Muted teal color for buttons, matching the secondary color */
-    --container-color: #E0F2F1; /* Lighter teal for container, complementing the theme */
+    --container-color: #f5f5f5; /* Lighter teal for container, complementing the theme */
 }
 
 .flex-deck {
@@ -66,6 +61,15 @@ button:hover, .button-flip:hover, .button-next:hover, .flex-deck:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
+.flip-container.flipped .flex-cards {
+    transform: rotateY(180deg);
+}
+
+.flip-container {
+    cursor: pointer;
+}
+
+
 button:active, .button-flip:active, .button-next:active, .flex-deck:active {
     transform: translateY(1px);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -91,11 +95,7 @@ button:active, .button-flip:active, .button-next:active, .flex-deck:active {
     }
 }
 
-@media (hover: none) {
-    .flip-container.flipped .flex-cards {
-        transform: rotateY(180deg);
-    }
-}
+
 .flip-container {
     border-radius: 40px; /* Added to round corners */
 }
