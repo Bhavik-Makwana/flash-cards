@@ -22,7 +22,7 @@ function updateProgress(category, progress, mastered, seen, total) {
 function fetchProgressData(category) {
     return new Promise((resolve, reject) => {
         $.ajax({
-            url: 'http://localhost:8080/api/v1/progress',
+            url: 'https://api.jpn-tourist-flashcards.com/api/v1/progress',
             method: 'GET',
             data: { category: category },
             success: function (response) {
@@ -40,7 +40,7 @@ function fetchProgressData(category) {
 function fetchWordsByCategory(category) {
     return new Promise((resolve, reject) => {
         $.ajax({
-            url: 'http://localhost:8080/api/v1/words/category',
+            url: 'https://api.jpn-tourist-flashcards.com/api/v1/words/category',
             method: 'GET',
             data: { category: category },
             success: function (response) {
