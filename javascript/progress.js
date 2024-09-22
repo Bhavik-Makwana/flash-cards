@@ -1,5 +1,5 @@
-// const API = "https://api.jpn-tourist-flashcards.com/api/v1";
-const API = "http://localhost:8080/api/v1";
+const API = "https://api.jpn-tourist-flashcards.com/api/v1";
+// const API = "http://localhost:8080/api/v1";
 
 // Function to update the pie chart (call this when you have the data)
 function updatePieChart(data) {
