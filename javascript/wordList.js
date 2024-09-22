@@ -30,7 +30,7 @@ export function fetchWordList(category) {
         },
         error: function(xhr, status, error) {
             console.error('Error fetching word list:', error);
-            alert('Error fetching word list:', error);
+            alert('Error fetching word list:', status);
         }
     });
 }
