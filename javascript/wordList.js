@@ -2,8 +2,8 @@
 import { initializeFlashcards, setFlashcards, getFlashcards } from './flashcards.js';
 import { setCurrentWordIndex } from './uiInteractions.js';  
 let wordStatuses = {};
-// const API = "https://api.jpn-tourist-flashcards.com/api/v1";
-const API = "http://localhost:8080/api/v1";
+const API = "https://api.jpn-tourist-flashcards.com/api/v1";
+// const API = "http://localhost:8080/api/v1";
 
 // Function to fetch word list for a category
 export function fetchWordList(category) {
@@ -30,6 +30,7 @@ export function fetchWordList(category) {
         },
         error: function(xhr, status, error) {
             console.error('Error fetching word list:', error);
+            alert('Error fetching word list:', error);
         }
     });
 }
