@@ -1,5 +1,5 @@
 import { updateWordStatus } from './wordList.js';
-import { getFlashcards, setFlashcards } from './flashcards.js';
+import { getFlashcards, setFlashcards, getAudio, setAudio } from './flashcards.js';
 import { updateFlashcard } from './flashcards.js';
 import { fetchWordList } from './wordList.js';
 // Add click event listener to flip-container
@@ -15,31 +15,29 @@ export function setCurrentWordIndex(index) {
     currentWordIndex = index;
 }
 
+// Add click event listener for audio button
+$('.audio-button').on('click', function() {
+    event.stopPropagation(); // Prevent the click event from bubbling up to the flip-container
+    const audio = getAudio();
+    audio.play().catch(error => {
+        console.error('Error playing audio:', error);
+    });
+});
+
 // Add click event listeners for category buttons
 $('.categories .flex-deck').on('click', function () {
     const categoryId = $(this).attr('id');
     const categoryName = $(this).text().trim();
-    // alert(`You clicked on the ${categoryName} category!`);
 
-    // Here you can add additional functionality,
-    // such as fetching flashcards for the selected category
+    // Remove highlight from all categories
+    $('.categories .flex-deck').css('background-color', '');
+
+    // Highlight the clicked category
+    $(this).css('background-color', '#1b9b88');
+
+    // Fetch flashcards for the selected category
     fetchWordList(categoryName);
 });
-
-
-
-
-// cards
-$(".button-flip").on("click", function () {
-    let transform = $(".flex-cards").css("transform");
-    console.log(transform);
-    // $(".flex-cards").css("transform", "rotateY(180deg)");
-    if (transform === "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)" || transform == undefined) {
-        $(".flex-cards").css("transform", "rotateY(0deg)");
-    } else {
-        $(".flex-cards").css("transform", "rotateY(180deg)");
-    }
-})
 
 
 // Modify your button click handlers

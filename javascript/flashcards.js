@@ -1,3 +1,5 @@
+import { setCurrentWordIndex } from "./uiInteractions.js";
+
 // Array to store flashcard data: [Japanese, English, Romanji]
 let flashcards = [
     // ["こんにちは", "Hello", "Konnichiwa"],
@@ -17,6 +19,14 @@ let flashcards = [
     // Add more flashcards here
 ];
 
+let audio = new Audio();
+export function getAudio() {
+    return audio;
+}
+export function setAudio(newAudio) {
+    audio = newAudio;
+}
+
 export function getFlashcards() {
     return flashcards;
 }
@@ -31,9 +41,8 @@ export function initializeFlashcards(flashcards) {
 }
 
 export function getNextFlashcard(flashcards, currentWordIndex) {
-    console.log("a", currentWordIndex, flashcards.length);
     if (currentWordIndex >= flashcards.length) {
-        currentWordIndex = 0;
+        setCurrentWordIndex(0);
         console.log("All cards have been reviewed!");
         // Make a call to the /save_progress post endpoint
         $.ajax({
@@ -64,6 +73,7 @@ export function updateFlashcard(flashcards, currentWordIndex) {
     $("#romanji-text").text(flashcard.romanji);
     $('#phonetic-text').text(flashcard.romanji);
     $("#english-text").text(flashcard.english);
+    audio = new Audio(`/assets/audio/${flashcard.audio_url}`);
     // $('#word-list li').forEach(li => li.classList.remove('current'));
     // document.getElementById(`word-${card.id}`).classList.add('current');
 }

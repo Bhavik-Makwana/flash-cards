@@ -8,6 +8,7 @@ $(document).ready(function () {
     const API = "https://api.jpn-tourist-flashcards.com/api/v1";
     const LOCAL_API = "http://localhost:8080/api/v1";
 
+    $('#essentials-category').css('background-color', '#1b9b88');
     fetchWordList('Essentials');
     generateNavBar();
     initializeWordList(getFlashcards());

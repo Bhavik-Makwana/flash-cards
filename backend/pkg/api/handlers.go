@@ -59,7 +59,7 @@ func (h *GenericHandler) GetWordsCategory(w http.ResponseWriter, r *http.Request
 	category := r.URL.Query().Get("category")
 	log.Printf("Category: %s", category)
 
-	rows, err := h.DB.Query("SELECT * FROM words WHERE category = ?", category)
+	rows, err := h.DB.Query("SELECT id, japanese, romanji, english, category, audio_url FROM words WHERE category = ?", category)
 	if err != nil {
 		log.Printf("Error querying words: %v", err)
 		http.Error(w, "Internal server error", http.StatusInternalServerError)
@@ -70,13 +70,13 @@ func (h *GenericHandler) GetWordsCategory(w http.ResponseWriter, r *http.Request
 	var words []models.Word
 	for rows.Next() {
 		var word models.Word
-		err := rows.Scan(&word.ID, &word.Japanese, &word.Romanji, &word.English, &word.Category)
+		err := rows.Scan(&word.ID, &word.Japanese, &word.Romanji, &word.English, &word.Category, &word.AudioUrl)
 		if err != nil {
 			log.Fatal(err)
 		}
 		words = append(words, word)
 	}
-
+	log.Printf("Words: %v", words)
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(words)
 }

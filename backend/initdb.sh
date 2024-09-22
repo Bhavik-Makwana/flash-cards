@@ -24,7 +24,8 @@ CREATE TABLE IF NOT EXISTS words (
     japanese TEXT NOT NULL,
     romanji TEXT NOT NULL,
     english TEXT NOT NULL,
-    category TEXT NOT NULL
+    category TEXT NOT NULL,
+    audio_url TEXT
 );
 
 CREATE TABLE IF NOT EXISTS users (

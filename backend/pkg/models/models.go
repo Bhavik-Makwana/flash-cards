@@ -12,6 +12,7 @@ type Word struct {
 	Romanji  string `json:"romanji"`
 	English  string `json:"english"`
 	Category string `json:"category"`
+	AudioUrl string `json:"audio_url"`
 }
 type Handler struct {
 	DB *sql.DB

@@ -81,6 +81,19 @@ button:active, .button-flip:active, .button-next:active, .flex-deck:active {
     gap: 20px;
     /* margin-bottom: 30px; */
 }
+.audio-button {
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: transform 0.2s ease;
+}
+
+.audio-button:hover {
+    transform: scale(1.1);
+    background-color: transparent;
+}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -164,7 +177,7 @@ button:active, .button-flip:active, .button-next:active, .flex-deck:active {
 }
 
 .content-container-back {
-    background-color: var(--success-color);
+    background-color: #fcfffb;
     transform: rotateY(180deg);
 }
 
