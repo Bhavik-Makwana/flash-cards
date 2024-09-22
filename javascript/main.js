@@ -12,6 +12,6 @@ $(document).ready(function () {
     fetchWordList('Essentials');
     generateNavBar();
     initializeWordList(getFlashcards());
-    initUIInteractions();
+    // initUIInteractions();
     initHamburgerMenu();
 });

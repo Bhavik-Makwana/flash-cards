@@ -24,7 +24,7 @@ export function generateNavBar() {
 export function initHamburgerMenu() {
     const hamburger = document.querySelector('.hamburger-menu');
     const navLinks = document.querySelector('.nav-links');
-    const closeButton = document.createElement('button');
+    // const closeButton = document.createElement('button');
 
     function toggleMenu() {
         navLinks.classList.toggle('active');
@@ -38,15 +38,15 @@ export function initHamburgerMenu() {
         return window.getComputedStyle(hamburger).display !== 'none';
     }
 
-    function toggleCloseButton() {
-        closeButton.style.display = isHamburgerMenuDisplayed() ? 'block' : 'none';
-    }
+    // function toggleCloseButton() {
+    //     closeButton.style.display = isHamburgerMenuDisplayed() ? 'block' : 'none';
+    // }
 
-    function initCloseButton() {
-        closeButton.textContent = 'X';
-        closeButton.classList.add('close-button');
-        navLinks.appendChild(closeButton);
-    }
+    // function initCloseButton() {
+    //     closeButton.textContent = 'X';
+    //     closeButton.classList.add('close-button');
+    //     navLinks.appendChild(closeButton);
+    // }
 
     function addEventListeners() {
         hamburger.addEventListener('click', toggleMenu);
@@ -61,12 +61,12 @@ export function initHamburgerMenu() {
             link.addEventListener('click', closeMenu);
         });
 
-        closeButton.addEventListener('click', closeMenu);
+        // closeButton.addEventListener('click', closeMenu);
 
-        window.addEventListener('resize', toggleCloseButton);
+        // window.addEventListener('resize', toggleCloseButton);
     }
 
-    initCloseButton();
-    toggleCloseButton();
+    // initCloseButton();
+    // toggleCloseButton();
     addEventListeners();
 }
