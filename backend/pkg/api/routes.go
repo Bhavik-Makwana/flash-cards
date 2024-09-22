@@ -27,6 +27,6 @@ func SetupRoutes(h *models.Handler, cfg config.Config) *mux.Router {
 	v1.HandleFunc("/signup", chain(ah.Signup))
 	v1.HandleFunc("/health_check", chain(gh.HealthCheck))
 	v1.HandleFunc("/words/category", chain(gh.GetWordsCategory))
-
+	v1.HandleFunc("/user", chain(ah.GetUser))
 	return r
 }

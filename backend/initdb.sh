@@ -30,10 +30,9 @@ CREATE TABLE IF NOT EXISTS words (
 
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
     username TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL,
-    the TEXT,
-    token TEXT
 );
 
 CREATE TABLE IF NOT EXISTS progress (

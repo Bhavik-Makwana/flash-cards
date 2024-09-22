@@ -73,7 +73,7 @@ async function processProgressData(data) {
                 }
                 if (word.correct_count / word.seen_count >= 0.8) {
                     masteredWords++;
-                    masteredWordsList.push(`<b>${word.english} | ${word.japanese} | ${word.romanji}</b>`);
+                    masteredWordsList.push(`${word.english} | ${word.japanese} | ${word.romanji}`);
                 }
             });
 

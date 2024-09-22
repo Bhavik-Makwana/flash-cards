@@ -188,6 +188,9 @@ footer {
     text-align: center;
     padding: 1rem 0;
     margin-top: 4rem;
+    position: absolute;
+    /* bottom: 0; */
+    width: 100%;
 }
 
 /* Responsive Design */

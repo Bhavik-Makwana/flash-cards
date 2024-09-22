@@ -33,18 +33,29 @@
     </header>
 
     <main>
-        <div class="profile-container">
-            <h2>User Profile</h2>
+        <div class="profile-container" style="color: black;">
+            <div class="profile-header">
+                <h2>Profile</h2>
+            </div>
             <div class="profile-info">
                 <p><strong>Name:</strong> <span id="user-name"></span></p>
                 <p><strong>Email:</strong> <span id="user-email"></span></p>
                 <p><strong>Member Since:</strong> <span id="member-since"></span></p>
             </div>
-            <button id="sign-out-btn" class="cta-button">Sign Out</button>
+            <div class="billing-info">
+                <h3>Billing Information</h3>
+                <p><strong>Plan:</strong> <span id="user-plan"></span></p>
+                <p><strong>Next Billing Date:</strong> <span id="next-billing-date"></span></p>
+                <p><strong>Payment Method:</strong> <span id="payment-method"></span></p>
+                <button id="update-billing" class="cta-button">Update Billing Info</button>
+            </div>
+            <div class="profile-actions">
+                <button id="sign-out-button" class="cta-button">Sign Out</button>
+            </div>
         </div>
     </main>
 
-    <footer>
+    <footer class="footer" style="bottom: 0;">
         <p>&copy; 2024 JPN Tourist Flashcards. All rights reserved.</p>
     </footer>
 </body>

@@ -5,10 +5,11 @@
     <meta name="theme-color" content="#E57373">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - JPN Tourist Flashcards</title>
-    <link rel="stylesheet" href="landing.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="script.js" defer></script>
+    <!-- <script src="javascript/main.js" type="module" defer></script> -->
+    <script src="javascript/login.js" type="module" defer></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id" content="1072559081821-n3jicditb9cskijnptjruq7o77ma3u0g.apps.googleusercontent.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -17,15 +18,15 @@
     <header>
         <nav>
             <div class="logo">
-                <img src="flag.png" alt="Japanese Flag" class="flag">
+                <img src="assets/white-logo.png" alt="Japanese Flag" class="flag">
                 <h1><a href="index.html" style="text-decoration: none; color: inherit;">JPN Tourist Flashcards</a></h1>
             </div>
             <div class="hamburger-menu">
-                <img src="menu_icon.svg" alt="Menu Icon" class="menu-icon">
+                <img src="assets/menu_icon.svg" alt="Menu Icon" class="menu-icon">
             </div>
             <ul class="nav-links">
-                <li><a href="index.html"><button class="start-button">Get Started</button></a></li>
-                <li><a href="login.html"><button class="login-button">Login</button></a></li>
+                <!-- <li><a href="index.html"><button class="start-button">Get Started</button></a></li> -->
+                <!-- <li><a href="login.html"><button class="login-button">Login</button></a></li> -->
             </ul>
             
                 
@@ -37,6 +38,7 @@
         <div class="login-container">
             <h2>Login</h2>
             <form class="login-form">
+                <!-- <input type="email" placeholder="Email" required id="email"> -->
                 <input type="email" placeholder="Email" required id="email">
                 <input type="password" placeholder="Password" required id="password">
                 <button type="submit" class="login-button-submit">Log In</button>
@@ -45,7 +47,7 @@
         </div>
     <div class="login-container">
         <h2>Sign Up</h2>
-        <form class="login-form">
+        <form class="signup-form">
             <input type="text" placeholder="Full Name" required>
             <input type="email" placeholder="Email" required>
             <input type="password" placeholder="Password" required>
@@ -61,7 +63,7 @@
     </div>
     </main>
 
-    <footer>
+    <footer class="footer">
         <p>&copy; 2024 JPN Tourist Flashcards. All rights reserved.</p>
     </footer>
     </body>

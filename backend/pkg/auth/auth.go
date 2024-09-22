@@ -26,6 +26,16 @@ func (h *AuthHandler) IsUserLoggedIn(r *http.Request) bool {
 	return err == nil
 }
 
+func (h *AuthHandler) GetUser(w http.ResponseWriter, r *http.Request) {
+	user, err := h.GetUserFromToken(r)
+	if err != nil {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(user)
+}
+
 func (h *AuthHandler) GetUserFromToken(r *http.Request) (models.User, error) {
 	authHeader := r.Header.Get("Authorization")
 	if authHeader == "" {
@@ -62,6 +72,7 @@ func (h *AuthHandler) GetUserFromToken(r *http.Request) (models.User, error) {
 }
 
 func (h *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
+	log.Printf("Login method called")
 	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return

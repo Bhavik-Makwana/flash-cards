@@ -9,8 +9,8 @@ export function generateNavBar() {
     if (!isUserLoggedIn()) {
         $navLinks.append(`
             <li><a href="#start"><button class="start-button">Get Started</button></a></li>
-            <li><a href="login.html"><button class="login-button">Login</button></a></li>
             <li><a href="progress.html"><button class="progress-button">Progress</button></a></li>
+            <li><a href="login.html"><button class="login-button">Login</button></a></li>
         `);
     } else {
         $navLinks.append(`

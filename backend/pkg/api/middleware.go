@@ -41,7 +41,6 @@ func MockAuthenticationMiddleware(next http.HandlerFunc) http.HandlerFunc {
 
 func corsMiddleware(config *config.Config, next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		log.Default().Println("Origin", r.Header.Get("Origin"))
 		if config.CORSAllowedOrigin == "*" {
 			w.Header().Set("Access-Control-Allow-Origin", "*")
 		} else {
@@ -58,7 +57,6 @@ func corsMiddleware(config *config.Config, next http.HandlerFunc) http.HandlerFu
 
 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
-		log.Default().Println("Header set", w.Header())
 		if r.Method == "OPTIONS" {
 			w.WriteHeader(http.StatusOK)
 			return
