@@ -1,5 +1,5 @@
-// const API = "https://api.jpn-tourist-flashcards.com/api/v1";
-const API = "http://localhost:8080/api/v1";
+const API = "https://api.jpn-tourist-flashcards.com/api/v1";
+// const API = "http://localhost:8080/api/v1";
 // login
 $(document).ready(function () {
     
@@ -19,9 +19,9 @@ $(document).ready(function () {
                     'Content-Type': 'application/json'
                 },
                 data: JSON.stringify(data),
-                // xhrFields: {
-                //     withCredentials: true
-                // },
+                xhrFields: {
+                    withCredentials: true
+                },
                 success: function (response) {
                     localStorage.setItem('token', response.token);
     
@@ -35,7 +35,7 @@ $(document).ready(function () {
                     if (xhr.status === 0) {
                         console.error("CORS error: The request was blocked by the CORS policy");
                     } else {
-                        console.error('Login failed:', error);
+                        console.error('Login failed:', status);
                     }
                     // Handle login error here
                     // For example, show an error message to the user
