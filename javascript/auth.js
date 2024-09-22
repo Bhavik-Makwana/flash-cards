@@ -1,5 +1,5 @@
 const API = "https://api.jpn-tourist-flashcards.com/api/v1";
-const LOCAL_API = "http://localhost:8080/api/v1";
+// const API = "http://localhost:8080/api/v1";
 // Function to check if the user is logged in
 function isLoggedIn() {
     // Check if there's a token in localStorage
