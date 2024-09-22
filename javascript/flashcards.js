@@ -75,6 +75,5 @@ export function updateFlashcard(flashcards, currentWordIndex) {
     $("#english-text").text(flashcard.english);
     audio = new Audio(`/assets/audio/${flashcard.category.toLowerCase()}/${flashcard.audio_url}`);
     console.log(audio);
-    // $('#word-list li').forEach(li => li.classList.remove('current'));
-    // document.getElementById(`word-${card.id}`).classList.add('current');
+    
 }
