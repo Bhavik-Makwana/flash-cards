@@ -95,6 +95,21 @@ button:active, .button-flip:active, .button-next:active, .flex-deck:active {
     background-color: transparent;
 }
 
+.button-correct {
+    background-color: transparent;
+}
+.button-correct:hover {
+    transform: scale(1.1);
+    background-color: transparent;
+}
+.button-incorrect {
+    background-color: transparent;
+    }
+.button-incorrect:hover {
+    transform: scale(1.1);
+    background-color: transparent;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .button-flip, .button-next {
