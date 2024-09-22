@@ -73,7 +73,7 @@ export function updateFlashcard(flashcards, currentWordIndex) {
     $("#romanji-text").text(flashcard.romanji);
     $('#phonetic-text').text(flashcard.romanji);
     $("#english-text").text(flashcard.english);
-    audio = new Audio(`/assets/audio/${flashcard.audio_url}`);
+    audio = new Audio(`/assets/audio/${flashcard.category.toLowerCase()}/${flashcard.audio_url}`);
     console.log(audio);
     // $('#word-list li').forEach(li => li.classList.remove('current'));
     // document.getElementById(`word-${card.id}`).classList.add('current');
