@@ -5,8 +5,8 @@
     <title>JPN Tourist Flashcards</title>
     <meta name="theme-color" content="#E57373">
     <link rel="apple-touch-icon" sizes="128x128" href="icon.png">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/landing.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/landing.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,16 +16,16 @@
         rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script src="../javascript/script.js" type="module" defer></script>
-    <link rel="icon" href="../assets/white-logo.png" type="image/png">
-    <link rel="shortcut icon" href="../assets/white-logo.png" type="image/png">
+    <script src="javascript/script.js" type="module" defer></script>
+    <link rel="icon" href="assets/white-logo.png" type="image/png">
+    <link rel="shortcut icon" href="assets/white-logo.png" type="image/png">
 </head>
 <script type="module">
-    import { isLoggedIn } from '../javascript/auth.js';
+    import { isLoggedIn } from './javascript/auth.js';
 
     $(document).ready(function() {
         if (!isLoggedIn()) {
-            window.location.href = '../index.html';
+            window.location.href = 'index.html';
         }
     });
 </script>
@@ -34,11 +34,11 @@
     <header>
         <nav>
             <div class="logo">
-                <img src="../assets/white-logo.png" alt="Japanese Flag" class="flag">
+                <img src="assets/white-logo.png" alt="Japanese Flag" class="flag">
                 <h1><a href="index.html" style="text-decoration: none; color: inherit;">JPN Tourist Flashcards</a></h1>
             </div>
             <div class="hamburger-menu">
-                <img src="../assets/menu_icon.svg" alt="Menu Icon" class="menu-icon">
+                <img src="assets/menu_icon.svg" alt="Menu Icon" class="menu-icon">
             </div>
             <ul class="nav-links">
                 <!-- <li><a href="index.html"><button class="start-button">Get Started</button></a></li> -->
@@ -52,15 +52,15 @@
     <!-- Categories -->
     <div class="container2">
 
-        <div class="container-deck">
+        <div class="container-deck categories">
             <!-- <div class="flex-empty"></div> -->
-            <button class="flex-deck"><b>Essentials</b></button>
-            <button class="flex-deck"><b>Emergency</b></button>
-            <button class="flex-deck"><b>Shopping</b></button>
-            <button class="flex-deck"><b>Time</b></button>
-            <button class="flex-deck"><b>Restaraunt/Food</b></button>
-            <button class="flex-deck"><b>Travel</b></button>
-            <button class="flex-deck"><b>Hotel</b></button>
+            <button class="flex-deck" id="essentials-category"><b>Essentials</b></button>
+            <button class="flex-deck" id="emergency-category"><b>Emergency</b></button>
+            <button class="flex-deck" id="shopping-category"><b>Shopping</b></button>
+            <button class="flex-deck" id="time-category"><b>Time</b></button>
+            <button class="flex-deck" id="dining-category"><b>Dining</b></button>
+            <button class="flex-deck" id="travel-category"><b>Travel</b></button>
+            <button class="flex-deck" id="hotel-category"><b>Hotel</b></button>
             <!-- <div class="flex-empty"></div> -->
         </div>
     </div>

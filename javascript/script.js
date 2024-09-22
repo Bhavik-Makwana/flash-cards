@@ -1,8 +1,9 @@
-const API = "https://api.jpn-tourist-flashcards.com/api/v1";
-const LOCAL_API = "http://localhost:8080/api/v1";
 
 import { login } from './login.js';
 $(document).ready(function () {
+
+    const API = "https://api.jpn-tourist-flashcards.com/api/v1";
+const LOCAL_API = "http://localhost:8080/api/v1";
 
     // Function to check if user is logged in
     function isUserLoggedIn() {
@@ -65,6 +66,49 @@ $(document).ready(function () {
     let wordStatuses = {};
 
 
+    // Function to fetch word list for a category
+    function fetchWordList(category) {
+        // $.ajax({
+        //     url: '/api/word_list',
+        //     method: 'GET',
+        //     data: { category: category },
+        //     success: function(response) {
+        //         displayWordList(response, category);
+        //     },
+        //     error: function(xhr, status, error) {
+        //         console.error('Error fetching word list:', error);
+        //     }
+        // });
+        const $wordList = $('#word-list').empty();
+          if (category.toLowerCase() === "essentials") {
+            // Fetch from API
+            $wordList.append($('<li>', {
+                text: 'Hello',
+                id: 'word-0'
+            }));
+        } else {
+            $.each(flashcards, function (index, card) {
+                const $li = $('<li>', {
+                    text: `${card[0]} - ${card[1]} - ${card[2]}`,  // Assuming Japanese text is the first element
+                    id: `word-${index}`
+                });
+                $wordList.append($li);
+    
+            });
+        }
+    }
+
+
+    // Add click event listeners for category buttons
+    $('.categories .flex-deck').on('click', function() {
+        const categoryId = $(this).attr('id');
+        const categoryName = $(this).text().trim();
+        // alert(`You clicked on the ${categoryName} category!`);
+        
+        // Here you can add additional functionality,
+        // such as fetching flashcards for the selected category
+        fetchWordList(categoryName);
+    });
 
     // Function to initialize the word list
     function initializeWordList() {
@@ -163,7 +207,7 @@ $(document).ready(function () {
     });
 
     function moveToNextWord() {
-        currentWordIndex = (currentWordIndex + 1) % (flashcards.length+1);
+        currentWordIndex = (currentWordIndex +1) % (flashcards.length);
         updateFlashcard();
     }
 
